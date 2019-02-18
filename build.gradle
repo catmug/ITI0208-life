@@ -17,6 +17,7 @@ bootJar {
     version =  '0.1.0'
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -29,5 +30,8 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework:spring-jdbc")
+    compile("org.hsqldb:hsqldb:2.4.1")
+    
     testCompile("junit:junit")
 }
