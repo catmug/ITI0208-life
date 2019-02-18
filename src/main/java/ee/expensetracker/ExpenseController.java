@@ -1,16 +1,29 @@
 package ee.expensetracker;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import ee.expensetracker.dao.TextHsqlDao;
+import ee.expensetracker.model.Text;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @RestController
 public class ExpenseController {
 
-    @CrossOrigin
-    @RequestMapping("/api")
-    public String index() {
-        return "Asi on pysti ja t;;tab";
+    @Autowired
+    private TextHsqlDao dao;
+
+    @PostMapping("expense")
+    public void save(@RequestBody Text text) {
+        dao.save(text);
+    }
+
+    @GetMapping("expense")
+    public List<Text> getTexts() {
+        return dao.findAll();
     }
 
 }
