@@ -3,18 +3,26 @@ package ee.expensetracker;
 import java.util.Arrays;
 import java.util.Collections;
 
+import ee.expensetracker.config.ApiConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
+@Configuration
+@Import({ApiConfig.class, CustomizationBean.class})
 public class Application {
 
     public static void main(String[] args) {
@@ -51,4 +59,14 @@ public class Application {
         };
     }
 
+}
+
+@Component
+class CustomizationBean
+        implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
+
+    @Override
+    public void customize(ConfigurableServletWebServerFactory container) {
+        container.setContextPath("/api");
+    }
 }
