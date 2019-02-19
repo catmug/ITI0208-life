@@ -1,6 +1,8 @@
 package ee.expensetracker;
 
+import ee.expensetracker.dao.ExpenseDao;
 import ee.expensetracker.dao.TextHsqlDao;
+import ee.expensetracker.model.Expense;
 import ee.expensetracker.model.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +16,15 @@ import java.util.List;
 public class ExpenseController {
 
     @Autowired
-    private TextHsqlDao dao;
+    private ExpenseDao dao;
 
-    @PostMapping("expense")
+    /*@PostMapping("expense")
     public void save(@RequestBody Text text) {
         dao.save(text);
-    }
+    }*/
 
     @GetMapping("expense")
-    public List<Text> getTexts() {
+    public List<Expense> getExpenses() {
         return dao.findAll();
     }
 
