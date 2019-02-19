@@ -22,7 +22,7 @@ CREATE TABLE expense (
   expense_id BIGINT NOT NULL PRIMARY KEY,
   category_id BIGINT NOT NULL,
   user_id BIGINT NOT NULL,
-  insertion_time TIMESTAMP DEFAULT LOCALTIMESTAMP(0),
+  insertion_time DATETIME DEFAULT LOCALTIMESTAMP(0),
   comment VARCHAR(255) NULL,
   amount DECIMAL NOT NULL,
   FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE NO ACTION ON UPDATE CASCADE ,
