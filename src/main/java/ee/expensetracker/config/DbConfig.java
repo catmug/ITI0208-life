@@ -24,7 +24,6 @@ public class DbConfig {
 
     @Bean
     public DataSource dataSource() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("org.hsqldb.jdbcDriver");
         ds.setUrl(env.getProperty("db.url"));
