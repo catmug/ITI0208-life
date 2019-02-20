@@ -1,18 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld v-bind:msg="hello"/>
+    <expense-input-plain></expense-input-plain>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import axios from "axios";
+import ExpenseInputPlain from "./components/ExpenseInputPlain";
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+      ExpenseInputPlain
   },
   data() {
     return {
@@ -20,7 +19,6 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8080/api').then(response => (this.hello = response.data));
   }
 }
 
