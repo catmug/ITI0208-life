@@ -10,15 +10,16 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-@Primary
-@Repository
+//@Primary
+//@Repository
 public class TextHsqlDao implements Dao {
 
     @Autowired
     private JdbcTemplate template;
 
     public Text save(Text text) {
-        String sql = "insert into text_table (id, text, amount) "
+        //find the category by name. insert too
+        String sql = "insert into expense (id, text, amount) "
                 + "values (NEXT VALUE FOR seq1, ?, ?)";
 
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
@@ -43,7 +44,7 @@ public class TextHsqlDao implements Dao {
     }
 
     public List<Text> findAll() {
-        String sql = "select id, text, amount from text_table";
+        String sql = "select * from text_table";
 
         return template.query(sql, (rs, rowNum) -> new Text(
                 rs.getLong("id"),
