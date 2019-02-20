@@ -1,4 +1,4 @@
-package ee.expensetracker;
+package ee.expensetracker.controller;
 
 import ee.expensetracker.dao.ExpenseDao;
 import ee.expensetracker.model.Expense;
