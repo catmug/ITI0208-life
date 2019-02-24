@@ -1,8 +1,11 @@
 <template>
     <div>
-        <select>
-            <option v-for="option in categories" :value="option">{{ option["name"] }}</option>
+        <select @change="onChange" v-model="selected">
+            <option v-for="option in categories" :value="option.name">{{ option.name }}</option>
+            <!--<option v-for="option in categories" :value="option">{{ option }}</option>-->
         </select>
+        <!--<p>{{ categories }}</p>-->
+        <p>{{ selected }}</p>
     </div>
 </template>
 
@@ -13,12 +16,17 @@
         name: "CategoryDropdown",
         data() {
             return {
-                categories: []
+                categories: [],
+                selected: ''
             }
         },
         methods: {
             get_categories() {
                 axios.get('http://localhost:8080/api/expense').then(response => (this.categories = response.data));
+            },
+            onChange(e) {
+                // alert(e.target)
+                // alert(e.target.options[e.target.options.selectedIndex].dataset.toString())
             }
         },
         mounted() {
