@@ -1,10 +1,11 @@
 <template>
     <div>
         <input v-model="expense.amount">
-        <CategoryDropdown ></CategoryDropdown>
+        <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
         <button @click="send">save</button>
         <p>
             <!--{{all}}-->
+            {{ category }}
         </p>
     </div>
 </template>
@@ -18,6 +19,7 @@
         components: {CategoryDropdown},
         data: function() {
             return {
+                category: '',
                 all: {},
                 expense: {
                     amount: 0,
@@ -32,6 +34,9 @@
                     this.expense
                 ).then(response => (this.success = response.data));
                 // axios.get('http://localhost:8080/api/expense').then(response=> (this.all = response.data));
+            },
+            getSelectedCategory(e) {
+                this.category = e;
             }
         }
     }

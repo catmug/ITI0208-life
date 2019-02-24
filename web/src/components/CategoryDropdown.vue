@@ -24,9 +24,8 @@
             get_categories() {
                 axios.get('http://localhost:8080/api/expense').then(response => (this.categories = response.data));
             },
-            onChange(e) {
-                // alert(e.target)
-                // alert(e.target.options[e.target.options.selectedIndex].dataset.toString())
+            onChange() {
+                this.$emit("on-change", this.selected)
             }
         },
         mounted() {
