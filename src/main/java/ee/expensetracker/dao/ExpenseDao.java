@@ -37,7 +37,7 @@ public class ExpenseDao implements Dao {
 
             System.out.println(ps);
 
-            ps.setLong(1, 1);
+            ps.setLong(1, expense.getCategory());
             ps.setLong(2, 1);
             ps.setTimestamp(3, now);
             ps.setString(4, expense.getComment());

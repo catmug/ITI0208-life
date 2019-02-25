@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <img alt="Vue logo" src="./assets/logo.png">
-        <expense-input-plain></expense-input-plain>
+        <ExpenseInputPlain></ExpenseInputPlain>
         <!--<CategoryDropdown></CategoryDropdown>-->
     </div>
 </template>

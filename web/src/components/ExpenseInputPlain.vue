@@ -8,9 +8,6 @@
         <p></p>
         <button @click="send">save</button>
         <p>
-            {{ expense }}
-        </p>
-        <p>
             {{ all }}
         </p>
     </div>
@@ -37,7 +34,9 @@
             send() {
                 axios.post('http://localhost:8080/api/expense',
                     this.expense
-                ).then(response => (this.success = response.data));
+                ).then(response => (this.success = response.data,
+                axios.get('http://localhost:8080/api/expense').then(response=> (this.all = response.data))
+                ));
                 // axios.get('http://localhost:8080/api/expense').then(response=> (this.all = response.data));
             },
             getSelectedCategory(e) {
