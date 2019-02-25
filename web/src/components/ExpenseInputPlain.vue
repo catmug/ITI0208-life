@@ -8,9 +8,10 @@
         <p></p>
         <button @click="send">save</button>
         <p>
-            <!--{{all}}-->
-            <!--{{ expense.category }}-->
             {{ expense }}
+        </p>
+        <p>
+            {{ all }}
         </p>
     </div>
 </template>
@@ -22,7 +23,7 @@
     export default {
         name: "ExpenseInputPlain",
         components: {CategoryDropdown},
-        data: function() {
+        data: function () {
             return {
                 all: {},
                 expense: {

@@ -25,7 +25,7 @@
                 axios.get('http://localhost:8080/api/expense').then(response => (this.categories = response.data));
             },
             onChange() {
-                this.$emit("on-change", this.selected)
+                this.$emit("on-change", this.selected);
             }
         },
         mounted() {
