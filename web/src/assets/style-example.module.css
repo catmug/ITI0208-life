@@ -2,3 +2,6 @@
     background-color: #adadad !important; /*remember that 'important' is bad*/
 }
 
+p {
+    color: red;
+}
