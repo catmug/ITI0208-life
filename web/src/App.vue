@@ -1,20 +1,26 @@
 <template>
-    <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png">
-        <ExpenseInputPlain></ExpenseInputPlain>
-        <!--<CategoryDropdown></CategoryDropdown>-->
+  <div class="container" id="app">
+    <div>
+      <b-card no-body>
+        <b-tabs lazy pills card vertical nav-wrapper-class="w-25">
+          <b-tab title="Add expense" active><expense-input-plain></expense-input-plain></b-tab>
+          <b-tab title="View expenses" ><expenses-table></expenses-table></b-tab>
+          <b-tab title="Settings">Todo settings</b-tab>
+        </b-tabs>
+      </b-card>
     </div>
+  </div>
 </template>
 
 <script>
-    import CategoryDropdown from "./components/CategoryDropdown";
     import ExpenseInputPlain from "./components/ExpenseInputPlain";
+    import ExpensesTable from "./components/ExpensesTable";
 
     export default {
         name: 'app',
         components: {
+            ExpensesTable,
             ExpenseInputPlain
-            // CategoryDropdown
         },
         data() {
             return {
@@ -28,12 +34,5 @@
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
+  @import "./assets/style-example.module.css";
 </style>
