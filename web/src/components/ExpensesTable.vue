@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-table striped hover :items="expenses" />
+        <b-table striped hover :items="expenses" :fields="fields"/>
     </div>
 </template>
 
@@ -11,6 +11,16 @@
         name: "ExpensesTable",
         data() {
             return {
+                fields: {
+                    amount: {
+                        label: 'Amount',
+                        sortable: true
+                    },
+                    insertTime: {
+                        label: 'Time added',
+                        sortable: true
+                    }
+                },
                 expenses: []
             }
         },
