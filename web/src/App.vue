@@ -3,18 +3,18 @@
         <img alt="Vue logo" src="./assets/logo.png">
         <expense-input-plain></expense-input-plain>
         <!--<CategoryDropdown></CategoryDropdown>-->
+        <hello-world></hello-world>
     </div>
 </template>
 
 <script>
-    import CategoryDropdown from "./components/CategoryDropdown";
     import ExpenseInputPlain from "./components/ExpenseInputPlain";
-
+    import HelloWorld from "./components/HelloWorld"
     export default {
         name: 'app',
         components: {
-            ExpenseInputPlain
-            // CategoryDropdown
+            ExpenseInputPlain,
+            HelloWorld
         },
         data() {
             return {
