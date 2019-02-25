@@ -1,26 +1,33 @@
 <template>
   <div class="container" id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <expense-input-plain></expense-input-plain>
+    <div>
+      <b-card no-body>
+        <b-tabs pills card vertical nav-wrapper-class="w-25">
+          <b-tab title="Add expense" active><expense-input-plain></expense-input-plain></b-tab>
+          <b-tab title="View expenses">Todo view</b-tab>
+          <b-tab title="Settings">Todo settings</b-tab>
+        </b-tabs>
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
-import ExpenseInputPlain from "./components/ExpenseInputPlain";
+    import ExpenseInputPlain from "./components/ExpenseInputPlain";
 
-export default {
-  name: 'app',
-  components: {
-      ExpenseInputPlain
-  },
-  data() {
-    return {
-      hello: null
+    export default {
+        name: 'app',
+        components: {
+            ExpenseInputPlain
+        },
+        data() {
+            return {
+                hello: null
+            }
+        },
+        mounted () {
+        }
     }
-  },
-  mounted () {
-  }
-}
 
 </script>
 
