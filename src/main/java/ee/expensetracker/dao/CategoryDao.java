@@ -11,7 +11,7 @@ import java.util.List;
 
 @Primary
 @Repository
-public class CategoryDao {
+public class CategoryDao implements Dao{
     @Autowired
     private JdbcTemplate template;
 

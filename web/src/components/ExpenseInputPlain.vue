@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <input v-model="expense.amount">
-        <button @click="send">save</button>
+    <div id="greeting">
         <p>
-            {{all}}
+            Hello {{username}}
         </p>
     </div>
 </template>
@@ -13,25 +11,21 @@
 
     export default {
         name: "ExpenseInputPlain",
-        data: function() {
+        data: function () {
             return {
-                all: {},
-                expense: {
-                    amount: 0,
-                    comment: '',
-                    category: 0
-                }
+                username: ' '
             }
         },
         methods: {
-            send() {
-                axios.post('http://localhost:8080/api/expense',
-                    this.expense
-                ).then(response => (this.success = response.data));
-                axios.get('http://localhost:8080/api/expense').then(response=> (this.all = response.data));
+            user: function () {
+                return axios.get('http://localhost:8080/api/user').then(response => (this.username = response.data));
             }
+        },
+        mounted() {
+            axios.get('http://localhost:8080/api/user').then(response => (this.username = response.data.username));
         }
     }
+
 </script>
 
 <style scoped>
