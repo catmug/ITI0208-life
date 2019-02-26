@@ -54,7 +54,7 @@ public class CategoryDao {
         return category;
     }
 
-    public void editCategory(Category category) {
+    public void rename(Category category) {
         String sql = "UPDATE category SET name = ?" +
                 "WHERE category_id = ?";
 

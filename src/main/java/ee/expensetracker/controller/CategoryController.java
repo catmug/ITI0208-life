@@ -29,7 +29,7 @@ public class CategoryController {
 
     @PostMapping("category/rename")
     public void rename(@RequestBody Category category) {
-        dao.editCategory(category);
+        dao.rename(category);
     }
 
 }
