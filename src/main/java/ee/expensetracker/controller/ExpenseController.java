@@ -14,9 +14,8 @@ public class ExpenseController {
     private ExpenseDao dao;
 
     @PostMapping("expense")
-    public String save(@RequestBody Expense expense) {
+    public void save(@RequestBody Expense expense) {
         dao.save(expense);
-        return "woop woop";
     }
 
     @GetMapping("expense")

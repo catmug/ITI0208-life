@@ -69,4 +69,12 @@ public class ExpenseDao implements Dao {
 
         template.update(sql, id);
     }
+
+    public void changeExpense(Expense expense) {
+        Long tempId = expense.getExpenseId();
+        String sql = "SELECT expense_id, category_id, user_id, insertion_time" +
+                ", comment, amount FROM expense " +
+                "WHERE expense_id=tempId";
+
+    }
 }

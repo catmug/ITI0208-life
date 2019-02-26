@@ -4,6 +4,8 @@ import ee.expensetracker.dao.CategoryDao;
 import ee.expensetracker.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,4 +21,15 @@ public class CategoryController {
     public List<Category> getCategories() {
         return dao.getAllCategories();
     }
+
+    @PostMapping("category")
+    public void save(@RequestBody Category category) {
+        dao.save(category);
+    }
+
+    @PostMapping("category/rename")
+    public void rename(@RequestBody Category category) {
+        dao.editCategory(category);
+    }
+
 }
