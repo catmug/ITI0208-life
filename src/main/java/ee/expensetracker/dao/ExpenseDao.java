@@ -66,6 +66,7 @@ public class ExpenseDao implements Dao {
 
     public void deleteById(Long id) {
         String sql = "delete from expense where expense_id = ?";
+
         template.update(sql, id);
     }
 }
