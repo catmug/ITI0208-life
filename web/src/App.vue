@@ -5,7 +5,7 @@
         <b-tabs lazy pills card vertical nav-wrapper-class="w-25">
           <b-tab title="Add expense" active><expense-input-plain></expense-input-plain></b-tab>
           <b-tab title="View expenses" ><expenses-table></expenses-table></b-tab>
-          <b-tab title="Settings">Todo settings</b-tab>
+          <b-tab title="Settings"><rename-category></rename-category></b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -15,12 +15,15 @@
 <script>
     import ExpenseInputPlain from "./components/ExpenseInputPlain";
     import ExpensesTable from "./components/ExpensesTable";
+    import RenameCategory from "./components/RenameCategory";
+
 
     export default {
         name: 'app',
         components: {
             ExpensesTable,
-            ExpenseInputPlain
+            ExpenseInputPlain,
+            RenameCategory
         },
         data() {
             return {
