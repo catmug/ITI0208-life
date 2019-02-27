@@ -38,7 +38,7 @@
         methods: {
             editCategory() {
                 axios.post('http://localhost:8080/api/category/rename', this.category)
-                    .then(response => (this.success = true));
+                    .then(response => (this.success = response.data.success));
                 this.message = 'Category updated to ' + this.category.name
             },
 
