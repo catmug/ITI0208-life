@@ -51,7 +51,7 @@
             info(item, index, button) {
                 this.modalInfo.title = item.comment;
                 this.modalInfo.content = JSON.stringify(item, null, 2);
-                this.modalInfo.id = item.id;
+                this.modalInfo.expenseId = item.expenseId;
                 this.modalInfo.amount = item.amount;
                 this.modalInfo.category = item.category;
                 this.modalInfo.comment= item.comment;
@@ -71,9 +71,13 @@
                 this.modalInfo.category = e;
             },
             send() {
-                axios.post('http://localhost:8080/api/expense',
+                axios.post('http://localhost:8080/api/expense/edit',
                     this.modalInfo
-                ).then(response => (this.success = response.data));
+                ).then(response => (this.success = response.data,
+                                            this.updateTable()));
+            },
+            updateTable() {
+                axios.get('http://localhost:8080/api/expense').then(response => (this.expenses = response.data));
             }
         },
         mounted() {
