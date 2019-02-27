@@ -23,6 +23,10 @@ public class ExpenseController {
         return dao.findAll();
     }
 
+    @PostMapping("expense/edit")
+    public void edit(@RequestBody Expense expense) {
+        dao.edit(expense);
+    }
 
     @DeleteMapping("expense/{id}")
     public void deleteById(@PathVariable("id") Long id) {

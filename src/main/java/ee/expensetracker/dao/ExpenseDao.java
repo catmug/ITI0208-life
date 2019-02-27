@@ -77,4 +77,24 @@ public class ExpenseDao implements Dao {
                 "WHERE expense_id=tempId";
 
     }
+
+    public void edit(Expense expense) {
+        String sql = "UPDATE expense SET category_id = ?, comment = ?, amount = ? WHERE expense_id = ?";
+        System.out.println("i got here");
+        template.update(conn -> {
+
+            PreparedStatement ps = conn.prepareStatement(
+                    sql);
+
+            System.out.println(ps);
+
+            ps.setLong(1, expense.getCategory());
+            ps.setString(2, expense.getComment());
+            ps.setDouble(3, expense.getAmount());
+            ps.setLong(4, expense.getExpenseId());
+
+            return ps;
+
+        });
+    }
 }
