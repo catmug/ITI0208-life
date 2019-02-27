@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <span>
         <select @change="onChange" v-model="selected">
             <option v-for="option in categories" :value="option.categoryId" :key="option.categoryId">{{ option.name }}</option>
         </select>
-    </div>
+    </span>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <span>
         <input v-model="expense.amount">
         <p></p>
         <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
@@ -7,7 +7,7 @@
         <input v-model="expense.comment" type="text">
         <p></p>
         <button @click="send">save</button>
-    </div>
+    </span>
 </template>
 
 <script>
