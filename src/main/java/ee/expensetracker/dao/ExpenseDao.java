@@ -21,10 +21,6 @@ public class ExpenseDao implements Dao {
 
     public Expense save(Expense expense) {
 
-        LocalDateTime ldt = LocalDateTime.now();
-        Timestamp now = Timestamp.valueOf(ldt);
-
-
         String sql = "insert into expense (expense_id, category_id, user_id, insertion_time, comment, amount) "
                 + "values (NEXT VALUE FOR seq_user, ?, ?, ? , ?, ?)";
 
@@ -39,7 +35,7 @@ public class ExpenseDao implements Dao {
 
             ps.setLong(1, expense.getCategory());
             ps.setLong(2, 1);
-            ps.setTimestamp(3, now);
+            ps.setTimestamp(3, Timestamp.valueOf(expense.getInsertTime()));
             ps.setString(4, expense.getComment());
             ps.setDouble(5, expense.getAmount());
 
@@ -59,7 +55,7 @@ public class ExpenseDao implements Dao {
                 rs.getLong("expense_id"),
                 rs.getLong("category_id"),
                 rs.getLong("user_id"),
-                rs.getTimestamp("insertion_time"),
+                rs.getTimestamp("insertion_time").toLocalDateTime(),
                 rs.getString("comment"),
                 rs.getDouble("amount")));
     }
