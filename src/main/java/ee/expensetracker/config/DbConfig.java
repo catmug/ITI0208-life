@@ -60,7 +60,7 @@ public class DbConfig {
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        factory.setPackagesToScan("model");
+        factory.setPackagesToScan("ee.expensetracker.model");
         factory.setDataSource(dataSource());
         factory.setJpaProperties(additionalProperties());
         factory.afterPropertiesSet();
@@ -70,7 +70,7 @@ public class DbConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
         properties.setProperty("hibernate.dialect",
                 "org.hibernate.dialect.HSQLDialect");
         properties.setProperty("hibernate.show_sql", "true");
