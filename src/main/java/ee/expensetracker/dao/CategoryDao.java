@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
 import java.util.List;
 
@@ -26,8 +27,13 @@ public class CategoryDao {
                 Category.class).getResultList();
     }
 
-    public Category save(Category category) {
-        return null;
+    @Transactional
+    public void save(Category category) {
+        if (category.getCategoryId() == null) {
+            em.persist(category);
+        } else {
+            em.merge(category);
+        }
     }
 
     public void rename(Category category) {

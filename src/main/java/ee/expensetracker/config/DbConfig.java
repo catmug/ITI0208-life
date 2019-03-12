@@ -15,6 +15,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -23,6 +24,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:/application.properties")
 @ComponentScan(basePackages = {"ee.expensetracker.dao"})
+@EnableTransactionManagement  // ADDING THIS GOT RID OF THE < No EntityManager error >
 public class DbConfig {
 
     @Autowired
@@ -70,7 +72,7 @@ public class DbConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-//        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
         properties.setProperty("hibernate.dialect",
                 "org.hibernate.dialect.HSQLDialect");
         properties.setProperty("hibernate.show_sql", "true");

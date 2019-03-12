@@ -36,6 +36,6 @@ public class Expense {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "amount")
+    @Column(name = "amount", precision=16, scale=2)
     private double amount;
 }
