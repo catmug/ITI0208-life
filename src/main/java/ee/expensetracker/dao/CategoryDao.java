@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.sql.PreparedStatement;
 import java.util.List;
 
@@ -36,7 +37,12 @@ public class CategoryDao {
         }
     }
 
-    public void rename(Category category) {
+    @Transactional
+    public void rename(@NotNull Category category) {
+        if (category.getCategoryId() != null && category.getName() != null) {
+            Category c = em.find(Category.class, category.getCategoryId());
+            c.setName(category.getName());
+        }
     }
 
 //    @Autowired
