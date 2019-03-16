@@ -1,35 +1,33 @@
-import Auth from "@okta/okta-vue";
 import Vue from 'vue'
-import Router from 'vue-router'
-import Todos from './components/Todos'
+import VueRouter from "vue-router";
+import hello from './components/Hello'
+import login from './components/Login'
+import store from "./store";
 
-Vue.use(Auth, {
-    issuer: 'https://dev-744831.okta.com/oauth2/default',
-    client_id: '{yourClientId}',
-    redirect_uri: window.location.origin + '/implicit/callback',
-    scope: 'openid profile email'
-});
+Vue.use(VueRouter);
 
-Vue.use(Router);
-
-let router = new Router({
-    mode: 'history',
+const router = new VueRouter({
     routes: [
         {
-            path: '/',
-            name: 'Todos',
-            component: Todos,
-            meta: {
-                requiresAuth: true
-            }
+            path: '/hello',
+            name: 'hello',
+            component: hello
         },
         {
-            path: '/implicit/callback',
-            component: Auth.handleCallback(),
-        },
+            path: '/login',
+            name: 'login',
+            component: login
+        }
     ]
 });
 
-router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = store.getters.isAuthenticated;
 
-export default router;
+    if (authRequired && !loggedIn) {
+        return next('/login');
+    }
+    next();
+});
