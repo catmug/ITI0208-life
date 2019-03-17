@@ -1,6 +1,7 @@
 package ee.expensetracker.dao;
 
 import ee.expensetracker.model.Expense;
+import ee.expensetracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,6 +27,11 @@ public class ExpenseDao implements Dao {
 
     @Transactional
     public void save(Expense expense) {
+        User user = em.find(User.class, 1L);
+        expense.setUser(user);
+        LocalDateTime ldt = LocalDateTime.now();
+        expense.setInsertTime(ldt);
+
         if (expense.getExpenseId() == null) {
             em.persist(expense);
         } else {

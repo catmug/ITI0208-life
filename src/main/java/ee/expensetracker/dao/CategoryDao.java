@@ -1,6 +1,7 @@
 package ee.expensetracker.dao;
 
 import ee.expensetracker.model.Category;
+import ee.expensetracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,8 @@ public class CategoryDao {
 
     @Transactional
     public void save(Category category) {
+        User user = em.find(User.class, 1L);
+        category.setUser(user);
         if (category.getCategoryId() == null) {
             em.persist(category);
         } else {
