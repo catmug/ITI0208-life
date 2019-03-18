@@ -1,12 +1,18 @@
 import Vue from 'vue'
 import VueRouter from "vue-router";
-import login from './components/Login'
+import login from './components/Login';
+import expense from './components/ExpenseView';
 import store from "./store";
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
+        {
+            path: '/expense',
+            name: 'expense',
+            component: expense
+        },
         {
             path: '/login',
             name: 'login',
