@@ -37,7 +37,6 @@ public class ExpenseController {
 //    public List<ExpenseDto> getExpenses() {
 //        return dao.findAll().stream()
 //                .map(this::convertToDto)
-//                .map(this)
 //                .collect(Collectors.toList());
         return dao.findAll();
     }
