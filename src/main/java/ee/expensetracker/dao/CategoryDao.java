@@ -42,9 +42,12 @@ public class CategoryDao {
 
     @Transactional
     public void rename(@NotNull Category category) {
+        System.out.println("minasiin");
+        System.out.println(category);
         if (category.getCategoryId() != null && category.getName() != null) {
             Category c = em.find(Category.class, category.getCategoryId());
             c.setName(category.getName());
+            System.out.println("hoopissiin");
         }
     }
 }
