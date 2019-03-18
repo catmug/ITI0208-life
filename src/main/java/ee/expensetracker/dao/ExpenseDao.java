@@ -59,8 +59,9 @@ public class ExpenseDao implements Dao {
         }
     }
 
+    @Transactional
     public void edit(Expense expense) {
         Long id = expense.getExpenseId();
-        em.merge(expense);
+        save(expense);
     }
 }
