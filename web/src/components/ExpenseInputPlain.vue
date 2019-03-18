@@ -23,7 +23,7 @@
                 expense: {
                     amount: 0,
                     comment: '',
-                    category: 0
+                    category: null
                 }
             }
         },

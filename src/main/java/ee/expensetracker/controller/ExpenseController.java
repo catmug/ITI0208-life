@@ -27,15 +27,18 @@ public class ExpenseController {
     private ModelMapper modelMapper;
 
     @PostMapping("expense")
-    public void save(@RequestBody ExpenseDto expense) throws ParseException {
-        dao.save(convertToModel(expense));
+    public void save(@RequestBody Expense expense) throws ParseException {
+//        dao.save(convertToModel(expense));
+        dao.save(expense);
     }
 
     @GetMapping("expense")
-    public List<ExpenseDto> getExpenses() {
-        return dao.findAll().stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
+    public List<Expense> getExpenses() {
+//    public List<ExpenseDto> getExpenses() {
+//        return dao.findAll().stream()
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
+        return dao.findAll();
     }
 
     @PostMapping("expense/edit")

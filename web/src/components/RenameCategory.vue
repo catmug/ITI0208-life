@@ -29,7 +29,7 @@
                 category: {
                     categoryId: 0,
                     name: '',
-                    userId: 1
+                    // userId: 1
                 },
 
             }
@@ -43,7 +43,7 @@
             },
 
             getSelectedCategory(e) {
-                this.category.categoryId = e;
+                this.category.categoryId = e.categoryId;
             }
         },
     }
