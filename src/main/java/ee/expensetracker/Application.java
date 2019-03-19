@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import ee.expensetracker.config.ApiConfig;
 import ee.expensetracker.config.CustomizationBean;
+import ee.expensetracker.config.SecurityConfiguration;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 @Configuration
-@Import({ApiConfig.class, CustomizationBean.class})
+@Import({ApiConfig.class, CustomizationBean.class, SecurityConfiguration.class})
 @ComponentScan(basePackages = {"ee.expensetracker.controller"})
 public class Application {
 

@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
  * https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
  * 06.03.2019 10:32
  */
+@CrossOrigin(origins = "http://localhost:9000/")
 @RestController
+@RequestMapping("/api")
 public class ExpenseController {
 
     @Autowired

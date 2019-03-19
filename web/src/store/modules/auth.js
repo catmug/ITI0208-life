@@ -25,10 +25,6 @@ const mutations = {
 
         axios.post('http://localhost:8080/login', data, {
             headers: headers,
-            /*auth:{
-                username: this.username,
-                password: this.password
-            }*/
         }).then(response => {
             state.user = user;
             localStorage.setItem('user', user);
