@@ -23,7 +23,7 @@ const mutations = {
             'Content-type': 'application/x-www-form-urlencoded'
         };
 
-        axios.post('http://localhost:8080/login', data, {
+        axios.post('http://localhost:8080/api/login', data, {
             headers: headers,
         }).then(response => {
             state.user = user;
