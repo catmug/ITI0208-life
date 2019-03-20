@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <input v-model="category.name" type="text">
-        <p></p>
-        <b-button @click="send()" variant="outline-primary">Add category</b-button>
-        <p>{{message}}</p>
+    <div class="container">
+        <div class="row pb-1">
+            <input class="form-control" v-model="category.name" type="text">
+        </div>
+        <div class="row">
+            <b-button @click="send()" variant="outline-primary">Add category</b-button>
+            <p>{{message}}</p>
+        </div>
     </div>
 </template>
 
@@ -15,6 +18,7 @@
         name: "AddCategory",
         data() {
             return {
+                success: '',
                 message: '',
                 category: {
                     name: '',
@@ -25,7 +29,7 @@
         methods: {
             send() {
                 axios.post('http://localhost:8080/api/category', this.category)
-                    .then(response => (this.success = response.data));
+                    .then(response => (this.success = response.data.success));
                 this.message = 'The category ' + this.category.name + ' has been added!'
             }
         }

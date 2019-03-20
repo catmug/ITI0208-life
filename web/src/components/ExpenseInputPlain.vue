@@ -1,13 +1,34 @@
 <template>
-    <span>
-        <input v-model="expense.amount">
-        <p></p>
-        <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
-        <p></p>
-        <input v-model="expense.comment" type="text">
-        <p></p>
-        <button @click="send">save</button>
-    </span>
+    <div>
+        <div class="form-group">
+            <input type="number" v-model="expense.amount" aria-describedby="amountHelp" class="form-control"
+                   placeholder="Amount">
+            <small id="amountHelp" class="form-text text-muted">How much you spent</small>
+        </div>
+        <div class="form-group">
+
+            <input v-model="expense.comment" type="text" class="form-control" placeholder="Comment">
+
+        </div>
+        <div class="form-group">
+            <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
+        </div>
+        <button class="btn btn-outline-primary" @click="send">save</button>
+
+    </div>
+
+    <!--<div class="container">-->
+    <!--<div class="row pb-1">-->
+    <!--<input v-model="expense.amount" placeholder="Enter email"></div>-->
+    <!--<div class="row pb-1">-->
+    <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown></div>-->
+    <!--<div class="row pb-1">-->
+    <!--<input v-model="expense.comment" type="text">-->
+    <!--</div>-->
+    <!--<div class="row pb-1">-->
+    <!--<button @click="send">save</button>-->
+    <!--</div>-->
+    <!--</div>-->
 </template>
 
 <script>

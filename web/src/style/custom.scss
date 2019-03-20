@@ -1,0 +1,46 @@
+// custom.scss
+
+// Define your variable overrides here
+$enable-shadows: true;
+$enable-gradients: true;
+$grid-breakpoints: (
+        xs: 0,
+        sm: 428px,
+        md: 799px,
+        lg: 899px,
+        xl: 1234px,
+        xxl: 1600px
+);
+
+//$custom-background: #ECECEC;
+//$custom-background-dark: #cbcbcb;
+//$custom-main: #90CCF4;
+//$custom-main-dark: #5DA2D5;
+//$custom-error: #F78888;
+//$custom-warn: #F3D250;
+//$custom-success: #00887A;
+
+
+$custom-background: #374785;
+$custom-background-dark: #24305E;
+$custom-main: #A8D0E6;
+$custom-main-dark: #374785;
+$custom-error: #F76C6C;
+$custom-warn: #F8E9A1;
+$custom-success: #00887A;
+
+$theme-colors: (
+  "primary": $custom-main-dark,
+  "danger": $custom-error,
+  "secondary": $custom-main,
+  "success": $custom-success,
+  //"info": $cyan,
+  "warning": $custom-warn,
+  "light": #ECECEC,
+  "dark": $custom-background-dark
+)!default;
+
+
+
+// Include Bootstrap and BootstrapVue SCSS files
+@import '~bootstrap/scss/bootstrap.scss';
