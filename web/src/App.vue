@@ -1,40 +1,14 @@
 <template>
   <div class="container" id="app">
-    <div>
-      <b-card no-body>
-        <b-tabs lazy pills card vertical nav-wrapper-class="w-25">
-          <b-tab title="Add expense" active><expense-input-plain></expense-input-plain></b-tab>
-          <b-tab title="View expenses" ><expenses-table></expenses-table></b-tab>
-          <b-tab title="Add Category"><add-category></add-category></b-tab>
-          <b-tab title="Settings"><rename-category></rename-category></b-tab>
-        </b-tabs>
-      </b-card>
-    </div>
+    <div><router-link to="/login">Login</router-link></div>
+    <div><router-link to="/expense">Expense adding</router-link></div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-    import ExpenseInputPlain from "./components/ExpenseInputPlain";
-    import ExpensesTable from "./components/ExpensesTable";
-    import RenameCategory from "./components/RenameCategory";
-    import AddCategory from "./components/AddCategory";
-
-
     export default {
-        name: 'app',
-        components: {
-            ExpensesTable,
-            ExpenseInputPlain,
-            RenameCategory,
-            AddCategory
-        },
-        data() {
-            return {
-                hello: null
-            }
-        },
-        mounted () {
-        }
+        name: 'app'
     }
 
 </script>
