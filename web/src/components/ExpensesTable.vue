@@ -3,6 +3,7 @@
         <b-table
                 striped
                 hover
+                responsive
                 :items="expenses"
                 :fields="fields"
         >
@@ -12,16 +13,30 @@
                 </b-button>
             </template>
         </b-table>
-        <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
-            <pre>
-                <div>
-                    <input v-model="modalInfo.amount">
-                    <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
-                    <input v-model="modalInfo.comment" type="text">
-                    <button @click="send">save</button>
+        <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
+                <!--<div>-->
+                <div class="form-group">
+                    <input type="number" v-model="modalInfo.amount" aria-describedby="amountHelp" class="form-control"
+                           placeholder="Amount">
+                    <small id="amountHelp" class="form-text text-muted">How much you spent</small>
                 </div>
+                <div class="form-group">
 
-            </pre>
+                    <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
+
+                </div>
+                <div class="form-group">
+                    <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
+                </div>
+                <!--<button class="btn btn-primary" @click="send">save</button>-->
+                <b-button class="mt-3" variant="success" block @click="send">Save</b-button>
+
+                <!--<input v-model="modalInfo.amount">-->
+                    <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>-->
+                    <!--<input v-model="modalInfo.comment" type="text">-->
+                    <!--<button @click="send">save</button>-->
+                <!--</div>-->
+
         </b-modal>
     </div>
 </template>

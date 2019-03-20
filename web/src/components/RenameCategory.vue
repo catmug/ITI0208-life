@@ -1,15 +1,16 @@
 <template>
     <div>
-        <p>Select category to rename:</p>
-        <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
-        <p></p>
-        <p>Rename category:</p>
-        <input v-model="category.name" type="text">
-        <p></p>
-        <b-button @click="editCategory" variant="outline-primary">Rename Category</b-button>
-        <p></p>
+        <div class="form-group">
+            <label>Select category to rename:</label>
+            <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
+        </div>
+        <div class="form-group">
+            <input class="form-control" v-model="category.name" type="text">
+        </div>
+        <div class="form-group">
+            <b-button @click="editCategory" variant="outline-primary">Rename Category</b-button>
+        </div>
         <p>{{message}}</p>
-
 
 
     </div>
