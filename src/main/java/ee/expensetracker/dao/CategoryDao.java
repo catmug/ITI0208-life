@@ -29,6 +29,13 @@ public class CategoryDao {
                 Category.class).getResultList();
     }
 
+    //todo change this. I added this temporarily
+    public Category getCategoryById(Long id) {
+        return em.createQuery(
+                "select c from Category c where category_id = " + id, //todo this is sooooo bad
+                Category.class).getSingleResult();
+    }
+
     @Transactional
     public void save(Category category) {
         User user = em.find(User.class, 1L);

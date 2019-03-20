@@ -1,5 +1,6 @@
 package ee.expensetracker.controller;
 
+import ee.expensetracker.dao.CategoryDao;
 import ee.expensetracker.dao.ExpenseDao;
 import ee.expensetracker.dto.ExpenseDto;
 import ee.expensetracker.model.Expense;
@@ -24,12 +25,17 @@ public class ExpenseController {
     private ExpenseDao dao;
 
     @Autowired
+    CategoryDao categoryDao;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @PostMapping("expense")
-    public void save(@RequestBody Expense expense) throws ParseException {
-//        dao.save(convertToModel(expense));
-        dao.save(expense);
+    public void save(@RequestBody ExpenseDto expense) throws ParseException {
+
+        System.out.println(expense);
+        dao.save(convertToModel(expense));
+//        dao.save(expense);
     }
 
     @GetMapping("expense")
@@ -58,6 +64,7 @@ public class ExpenseController {
 
         Expense expense = modelMapper.map(expenseDto, Expense.class);
         expense.setInsertTime(expenseDto.getInsertionDateConverted());
+        expense.setCategory(categoryDao.getCategoryById(expenseDto.getCategory()));
         return expense;
     }
 
