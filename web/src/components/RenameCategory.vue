@@ -30,7 +30,6 @@
                 category: {
                     categoryId: 0,
                     name: '',
-                    // userId: 1
                 },
 
             }
@@ -44,7 +43,7 @@
             },
 
             getSelectedCategory(e) {
-                this.category.categoryId = e.categoryId;
+                this.category.categoryId = e;
             }
         },
     }
