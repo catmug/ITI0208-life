@@ -44,7 +44,7 @@
                 expense: {
                     amount: 0,
                     comment: '',
-                    category: null
+                    categoryId: null
                 }
             }
         },
