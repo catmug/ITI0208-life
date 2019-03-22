@@ -53,15 +53,7 @@ public class ExpenseDao implements Dao {
     }
 
     @Transactional
-    public void changeExpense(Expense expense) {
-        if (expense != null) {
-            save(expense);
-        }
-    }
-
-    @Transactional
     public void edit(Expense expense) {
-        Long id = expense.getExpenseId();
         save(expense);
     }
 }

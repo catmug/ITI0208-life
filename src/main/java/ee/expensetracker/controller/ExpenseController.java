@@ -3,6 +3,7 @@ package ee.expensetracker.controller;
 import ee.expensetracker.dao.CategoryDao;
 import ee.expensetracker.dao.ExpenseDao;
 import ee.expensetracker.dto.ExpenseDto;
+import ee.expensetracker.dto.ExpenseDto;
 import ee.expensetracker.model.Expense;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +33,19 @@ public class ExpenseController {
 
     @PostMapping("expense")
     public void save(@RequestBody ExpenseDto expense) throws ParseException {
-
-        System.out.println(expense);
         dao.save(convertToModel(expense));
-//        dao.save(expense);
     }
 
     @GetMapping("expense")
-    public List<Expense> getExpenses() {
-//    public List<ExpenseDto> getExpenses() {
-//        return dao.findAll().stream()
-//                .map(this::convertToDto)
-//                .collect(Collectors.toList());
-        return dao.findAll();
+    public List<ExpenseDto> getExpenses() {
+        return dao.findAll().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("expense/edit")
-    public void edit(@RequestBody Expense expense) {
-        dao.edit(expense);
+    public void edit(@RequestBody ExpenseDto expense) throws ParseException {
+        dao.edit(convertToModel(expense));
     }
 
     @DeleteMapping("expense/{id}")

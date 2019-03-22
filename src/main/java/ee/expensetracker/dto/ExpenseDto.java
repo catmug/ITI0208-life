@@ -18,7 +18,6 @@ public class ExpenseDto {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Long expenseId;
     private Long category;
-    private Long user;
     private String insertTime;
     private String comment;
     private double amount;
