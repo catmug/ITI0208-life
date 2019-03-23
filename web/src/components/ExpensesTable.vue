@@ -11,6 +11,9 @@
                 <b-button size="sm" @click="info(row.item, row.index, $event.target)">
                     Edit
                 </b-button>
+                <b-button size="sm" @click="deleteExpense(row.item)">
+                    Remove
+                </b-button>
             </template>
         </b-table>
         <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
@@ -93,6 +96,11 @@
             },
             updateTable() {
                 axios.get('http://localhost:8080/api/expense').then(response => (this.expenses = response.data));
+            },
+            deleteExpense(item) {
+                axios.delete("http://localhost:8080/api/expense/" + item.expenseId)
+                    .then(response => (this.success = response.data.success,
+                                            this.updateTable()));
             }
         },
         mounted() {
