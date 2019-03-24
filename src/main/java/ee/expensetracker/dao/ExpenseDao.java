@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
@@ -43,6 +44,13 @@ public class ExpenseDao implements Dao {
         return em.createQuery(
                 "select e from Expense e",
                 Expense.class).getResultList();
+    }
+
+    public List<Expense> findAllByCategory(Long id) {
+        Query query = em.createQuery("select e from Expense e where e.category.categoryId=:id", Expense.class);
+        query.setParameter("id", id);
+        return query.getResultList();
+
     }
 
     @Transactional

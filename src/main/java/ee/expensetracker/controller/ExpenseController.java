@@ -43,6 +43,13 @@ public class ExpenseController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("expense/{id}")
+    public List<ExpenseDto> getExpenses(@PathVariable("id") Long id) {
+        return dao.findAllByCategory(id).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     @PostMapping("expense/edit")
     public void edit(@RequestBody ExpenseDto expense) throws ParseException {
         dao.edit(convertToModel(expense));

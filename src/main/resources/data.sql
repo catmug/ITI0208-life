@@ -5,4 +5,7 @@ INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_cat
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'Meelelahutus', 1);
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'Kodutarbed', 1);
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'elektroonika', 1);
-INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 1, 2, '2017-08-16 09:37:38','useful', 24.50)
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 1, 2, '2017-08-16 09:37:38','useful', 24.50);
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 2, 2, '2017-08-16 09:37:38','toit1', 5);
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 2, 2, '2017-08-16 09:37:38','toit2', 10);
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 5, 2, '2017-08-16 09:37:38','mp3', 2000);
