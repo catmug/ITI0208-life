@@ -1,5 +1,7 @@
 <template>
     <div>
+        <b-button @click="updateTable">All</b-button>
+        <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
         <b-table
                 striped
                 hover
@@ -61,8 +63,10 @@
                     {key: 'actions', label: ''}
                 ],
                 expenses: [],
-                modalInfo: {title: '', content: ''}
-
+                modalInfo: {title: '', content: ''},
+                category: {
+                    categoryId: 0,
+                }
             }
         },
         methods: {
@@ -87,6 +91,7 @@
             },
             getSelectedCategory(e) {
                 this.modalInfo.category = e;
+                this.category.categoryId = e;
             },
             send() {
                 axios.post('http://localhost:8080/api/expense/edit',
@@ -95,12 +100,17 @@
                                             this.updateTable()));
             },
             updateTable() {
-                axios.get('http://localhost:8080/api/expense').then(response => (this.expenses = response.data));
+                axios.get('http://localhost:8080/api/expense')
+                    .then(response => (this.expenses = response.data));
             },
             deleteExpense(item) {
                 axios.delete("http://localhost:8080/api/expense/" + item.expenseId)
                     .then(response => (this.success = response.data.success,
                                             this.updateTable()));
+            },
+            getExpensesByCategory(id) {
+                axios.get("http://localhost:8080/api/expense/" + id)
+                    .then(response => (this.expenses = response.data));
             }
         },
         mounted() {

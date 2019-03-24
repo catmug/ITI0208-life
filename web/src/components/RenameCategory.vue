@@ -29,9 +29,8 @@
                 message: '',
                 category: {
                     categoryId: 0,
-                    name: '',
-                },
-
+                    name: ''
+                }
             }
         },
         components: {CategoryDropdown},
