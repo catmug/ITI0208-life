@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-button @click="updateTable">All</b-button>
         <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
         <b-table
                 striped
