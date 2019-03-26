@@ -1,5 +1,7 @@
 package ee.expensetracker.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +24,12 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "password")
     private String password;
+
+    @JsonCreator
+    public User(@JsonProperty("username")String username, @JsonProperty("password")String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
