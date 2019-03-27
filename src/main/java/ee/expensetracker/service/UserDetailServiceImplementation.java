@@ -23,8 +23,6 @@ public class UserDetailServiceImplementation implements UserDetailsService {
     @Override
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(username);
         User u = dao.findUserByUsername(username);
         if(u == null) {
             throw new UsernameNotFoundException("User not found");
