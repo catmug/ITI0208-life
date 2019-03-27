@@ -9,7 +9,6 @@
         <div>
             <router-link to="/register">Register</router-link>
         </div>
-        <!--<span v-if="isLoggedIn"><a @click="logout()">Logout</a></span>-->
         <router-view></router-view>
     </div>
 </template>
@@ -20,18 +19,6 @@
 
     export default {
         name: 'app',
-        /*computed: {
-            isLoggedIn: function () {
-                return this.$store.getters.isAuthenticated;
-            }
-        },
-        methods: {
-            logout: function () {
-                this.$store.dispatch("logout").then(() => {
-                    this.$router.push("/login");
-                })
-            }
-        }*/
     }
 
 </script>

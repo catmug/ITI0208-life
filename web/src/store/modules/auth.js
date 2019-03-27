@@ -1,6 +1,6 @@
 import {AUTH_REQUEST} from "../constants";
 import {AUTH_REGISTER} from "../constants";
-//import {AUTH_LOGOUT} from "../constants";
+import {AUTH_LOGOUT} from "../constants";
 import axios from "axios";
 
 const state = {user: localStorage.getItem('user') || ''};
@@ -24,13 +24,12 @@ const actions = {
         })
     },
 
-    /*[AUTH_LOGOUT]:
-        ({commit, dispatch}) => {
-            return new Promise((resolve, reject) => {
-                commit(AUTH_LOGOUT);
-                resolve()
-            })
-        }*/
+    [AUTH_LOGOUT]: ({commit, dispatch}) => {
+        return new Promise((resolve, reject) => {
+            commit(AUTH_LOGOUT);
+            resolve()
+        })
+    }
 };
 
 const mutations = {
@@ -67,10 +66,19 @@ const mutations = {
             localStorage.removeItem('user');
         })
     },
-    /*[AUTH_LOGOUT]: (state) => {
-            state.user = '';
-            localStorage.removeItem('user');
-    }*/
+    [AUTH_LOGOUT]: (state) => {
+        axios.get('http://localhost:8080/api/logout').then(
+            resp => {
+                state.user = '';
+                localStorage.removeItem('user');
+            }
+        ).catch(error => {
+                state.user = '';
+                localStorage.removeItem('user');
+            }
+        )
+
+    }
 };
 
 export default {
