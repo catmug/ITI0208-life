@@ -52,7 +52,6 @@ const mutations = {
 
     [AUTH_REGISTER]: (state, user) => {
         let data = JSON.stringify(user);
-        //let data = '"username": "'+user.username+'"&password" : "' +user.password + '"';
         let headers = {
             'Content-type': 'application/json'
         };
