@@ -8,7 +8,7 @@
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item-dropdown text="User" left>
                         <b-dropdown-item href="#">Settings</b-dropdown-item>
-                        <b-dropdown-item href="#">Logout</b-dropdown-item>
+                        <b-dropdown-item href="#" @click="logout">Logout</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-navbar>
@@ -29,6 +29,7 @@
     import ExpensesTable from "./ExpensesTable";
     import RenameCategory from "./RenameCategory";
     import AddCategory from "./AddCategory";
+    import {AUTH_LOGOUT} from "../store/constants";
 
     export default {
         name: "ExpenseView",
@@ -41,6 +42,13 @@
         data() {
             return {
                 hello: null
+            }
+        },
+        methods: {
+            logout: function () {
+                this.$store.dispatch(AUTH_LOGOUT).then(() => {
+                    this.$router.push("/login");
+                })
             }
         },
         mounted () {

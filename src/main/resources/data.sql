@@ -1,5 +1,5 @@
-INSERT INTO user (user_id, username, email, password) VALUES (NEXT VALUE FOR seq_user, 'darnmonster', 'lol@gmail.com', 'darn');
-INSERT INTO user (user_id, username, email, password) VALUES (NEXT VALUE FOR seq_user, 'marko', 'marko@gmail.com', 'essas');
+INSERT INTO user (user_id, username, password) VALUES (NEXT VALUE FOR seq_user, 'darnmonster', 'darn');
+INSERT INTO user (user_id, username, password) VALUES (NEXT VALUE FOR seq_user, 'marko', 'essas');
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'Riided', 1);
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'Toidukaubad', 1);
 INSERT INTO category (category_id, name, user_id) VALUES (NEXT VALUE FOR seq_category, 'Meelelahutus', 1);
