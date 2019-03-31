@@ -6,7 +6,7 @@
                     <b-navbar-brand href="#">Expense tracker</b-navbar-brand>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown text="User" left>
+                    <b-nav-item-dropdown :text= "username" left>
                         <b-dropdown-item href="#">Settings</b-dropdown-item>
                         <b-dropdown-item href="#" @click="logout">Logout</b-dropdown-item>
                     </b-nav-item-dropdown>
@@ -30,6 +30,7 @@
     import RenameCategory from "./RenameCategory";
     import AddCategory from "./AddCategory";
     import {AUTH_LOGOUT} from "../store/constants";
+    import $store from "../store/modules/auth";
 
     export default {
         name: "ExpenseView",
@@ -41,7 +42,8 @@
     },
         data() {
             return {
-                hello: null
+                hello: null,
+                username: $store.state.user.username
             }
         },
         methods: {
