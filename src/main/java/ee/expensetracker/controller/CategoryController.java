@@ -3,8 +3,11 @@ package ee.expensetracker.controller;
 import ee.expensetracker.dao.CategoryDao;
 import ee.expensetracker.dto.CategoryDto;
 import ee.expensetracker.model.Category;
+import ee.expensetracker.service.MyUserPrincipal;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -24,7 +27,7 @@ public class CategoryController {
 
     @GetMapping("category")
     public List<CategoryDto> getCategories() {
-        return dao.getAllCategories().stream()
+        return dao.getCategoriesByUserId().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }

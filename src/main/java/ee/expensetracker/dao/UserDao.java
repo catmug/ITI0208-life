@@ -1,7 +1,10 @@
 package ee.expensetracker.dao;
 
 import ee.expensetracker.model.User;
+import ee.expensetracker.service.MyUserPrincipal;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 
@@ -25,6 +28,16 @@ public class UserDao {
             em.merge(user);
         }
     }
+
+    public Long getLoggedInUserId() {
+        Long id = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            id = ((MyUserPrincipal)principal).getUserId();
+        }
+        return id;
+    }
+
 
     public List<User> findAll() {
         return em.createQuery(

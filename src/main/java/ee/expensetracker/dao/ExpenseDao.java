@@ -26,9 +26,12 @@ public class ExpenseDao implements Dao {
     @PersistenceContext
     private EntityManager em;
 
+    @Autowired
+    private UserDao userDao;
+
     @Transactional
     public void save(Expense expense) {
-        User user = em.find(User.class, 1L);
+        User user = em.find(User.class, userDao.getLoggedInUserId());
         expense.setUser(user);
         LocalDateTime ldt = LocalDateTime.now();
         expense.setInsertTime(ldt);
@@ -40,10 +43,11 @@ public class ExpenseDao implements Dao {
         }
     }
 
-    public List<Expense> findAll() {
+    public List<Expense> findCategoriesByUserId() {
+        long id = userDao.getLoggedInUserId();
         return em.createQuery(
-                "select e from Expense e",
-                Expense.class).getResultList();
+                "select e from Expense e where e.user.userId = :id",
+                Expense.class).setParameter("id", id).getResultList();
     }
 
     public List<Expense> findAllByCategory(Long id) {
