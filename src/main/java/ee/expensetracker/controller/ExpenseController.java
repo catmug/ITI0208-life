@@ -2,7 +2,7 @@ package ee.expensetracker.controller;
 
 import ee.expensetracker.dao.CategoryDao;
 import ee.expensetracker.dao.ExpenseDao;
-import ee.expensetracker.dto.ExpenseDto;
+import ee.expensetracker.dao.UserDao;
 import ee.expensetracker.dto.ExpenseDto;
 import ee.expensetracker.model.Expense;
 import org.modelmapper.ModelMapper;
@@ -31,6 +31,9 @@ public class ExpenseController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    UserDao userDao;
+
     @PostMapping("expense")
     public void save(@RequestBody ExpenseDto expense) throws ParseException {
         dao.save(convertToModel(expense));
@@ -38,7 +41,7 @@ public class ExpenseController {
 
     @GetMapping("expense")
     public List<ExpenseDto> getExpenses() {
-        return dao.findAll().stream()
+        return dao.findCategoriesByUserId().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
