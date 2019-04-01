@@ -14,7 +14,6 @@
             <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
         </div>
         <button class="btn btn-outline-primary" @click="send">save</button>
-
     </div>
 
     <!--<div class="container">-->
