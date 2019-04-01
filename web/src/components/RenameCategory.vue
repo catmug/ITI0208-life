@@ -11,7 +11,7 @@
             <b-button @click="editCategory" variant="outline-primary">Rename Category</b-button>
         </div>
         <p>{{message}}</p>
-
+        <AddGoal></AddGoal>
 
     </div>
 </template>
@@ -19,6 +19,7 @@
 <script>
 
     import CategoryDropdown from "./CategoryDropdown";
+    import AddGoal from "./AddGoal";
     import axios from "axios"
 
     export default {
@@ -33,7 +34,7 @@
                 }
             }
         },
-        components: {CategoryDropdown},
+        components: {CategoryDropdown, AddGoal},
         methods: {
             editCategory() {
                 axios.post('http://localhost:8080/api/category/rename', this.category)
