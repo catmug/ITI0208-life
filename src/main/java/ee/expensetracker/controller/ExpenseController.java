@@ -67,7 +67,7 @@ public class ExpenseController {
 
         Expense expense = modelMapper.map(expenseDto, Expense.class);
         expense.setInsertTime(expenseDto.getInsertionDateConverted());
-        expense.setCategory(categoryDao.getCategoryById(expenseDto.getCategory()));
+        expense.setCategory(categoryDao.getCategoryById(expenseDto.getCategoryId()));
         return expense;
     }
 

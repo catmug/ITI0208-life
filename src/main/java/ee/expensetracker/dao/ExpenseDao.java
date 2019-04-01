@@ -64,4 +64,9 @@ public class ExpenseDao implements Dao {
     public void edit(Expense expense) {
         save(expense);
     }
+
+    public List<Expense> findAllByPeriod() {
+
+        return Collections.emptyList();
+    }
 }
