@@ -1,5 +1,6 @@
 <template>
         <select class="form-control form-select-button" @change="onChange" v-model="selected">
+            <option value="" disabled hidden>Choose category</option>
             <option v-for="option in categories" :value="option.categoryId" :key="option.categoryId">{{ option.name }}</option>
         </select>
 </template>
@@ -12,7 +13,7 @@
         data() {
             return {
                 categories: [],
-                selected: 0
+                selected: ""
             }
         },
         methods: {

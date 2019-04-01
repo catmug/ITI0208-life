@@ -44,7 +44,7 @@
                 expense: {
                     amount: 0,
                     comment: '',
-                    categoryId: null
+                    categoryId: 0
                 }
             }
         },
@@ -55,7 +55,7 @@
                 ).then(response => (this.success = response.data));
             },
             getSelectedCategory(e) {
-                this.expense.category = e;
+                this.expense.categoryId = e;
             }
         }
     }
