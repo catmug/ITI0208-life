@@ -35,8 +35,11 @@ router.beforeEach((to, from, next) => {
 
     if (authRequired && !loggedIn) {
         return next('/login');
+    } else if (authRequired && loggedIn){
+        next();
+    } else {
+        next();
     }
-    next();
 });
 
 export default router;

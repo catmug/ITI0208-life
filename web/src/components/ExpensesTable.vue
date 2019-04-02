@@ -79,7 +79,7 @@
                 category: {
                     categoryId: 0,
                 },
-                message: ''
+                message: '',
                 perPage: 2,
                 currentPage: 1
             }
