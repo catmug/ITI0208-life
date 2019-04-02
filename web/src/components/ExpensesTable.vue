@@ -35,6 +35,7 @@
                 </div>
                 <!--<button class="btn btn-primary" @click="send">save</button>-->
                 <b-button class="mt-3" variant="success" block @click="send">Save</b-button>
+            <p>{{message}}</p>
 
                 <!--<input v-model="modalInfo.amount">-->
                     <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>-->
@@ -66,7 +67,8 @@
                 modalInfo: {title: '', content: ''},
                 category: {
                     categoryId: 0,
-                }
+                },
+                message: ''
             }
         },
         methods: {
@@ -98,6 +100,7 @@
                     this.modalInfo
                 ).then(response => (this.success = response.data,
                                             this.updateTable()));
+                this.message = "The expense has been updated!"
             },
             updateTable() {
                 axios.get('http://localhost:8080/api/expense')

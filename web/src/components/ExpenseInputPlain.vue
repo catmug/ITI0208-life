@@ -14,6 +14,7 @@
             <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
         </div>
         <button class="btn btn-outline-primary" @click="send">save</button>
+        <p>{{message}}</p>
 
     </div>
 
@@ -45,7 +46,8 @@
                     amount: 0,
                     comment: '',
                     categoryId: 0
-                }
+                },
+                message: ''
             }
         },
         methods: {
@@ -53,6 +55,7 @@
                 axios.post('http://localhost:8080/api/expense',
                     this.expense
                 ).then(response => (this.success = response.data));
+                this.message =  'New Expense has been added';
             },
             getSelectedCategory(e) {
                 this.expense.categoryId = e;
