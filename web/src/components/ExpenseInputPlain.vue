@@ -15,7 +15,6 @@
         </div>
         <button class="btn btn-outline-primary" @click="send">save</button>
         <p>{{message}}</p>
-
     </div>
 
     <!--<div class="container">-->

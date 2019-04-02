@@ -1,13 +1,24 @@
 <template>
     <div>
         <b-button @click="updateTable">All</b-button>
+        <label>Kategooria kaupa sorteerimine</label>
         <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
+        <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="expenseTable"
+        />
         <b-table
+                id="expenseTable"
                 striped
                 hover
                 responsive
                 :items="expenses"
                 :fields="fields"
+                :per-page="perPage"
+                :current-page="currentPage"
+                small
         >
             <template slot="actions" slot-scope="row">
                 <b-button size="sm" @click="info(row.item, row.index, $event.target)">
@@ -69,6 +80,8 @@
                     categoryId: 0,
                 },
                 message: ''
+                perPage: 2,
+                currentPage: 1
             }
         },
         methods: {
@@ -118,6 +131,11 @@
         },
         mounted() {
             axios.get('http://localhost:8080/api/expense').then(response => (this.expenses = response.data));
+        },
+        computed: {
+            rows() {
+                return this.expenses.length
+            }
         }
     }
 </script>
