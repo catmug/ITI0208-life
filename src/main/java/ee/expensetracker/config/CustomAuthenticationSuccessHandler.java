@@ -11,6 +11,6 @@ import java.io.IOException;
 public class CustomAuthenticationSuccessHandler implements org.springframework.security.web.authentication.AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.setStatus(HttpStatus.ACCEPTED.value());
+        response.setStatus(HttpStatus.OK.value());
     }
 }

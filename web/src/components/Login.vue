@@ -1,9 +1,10 @@
 <template>
-    <form id="login" v-on:submit.prevent="login">
+    <div id="login">
+        <h1 class="my-2">Login</h1>
         <input type='text' placeholder='username' v-model='username'>
         <input type='password' placeholder='password' v-model='password'>
-        <button class="ui primary button">Submit</button>
-    </form>
+        <button type="submit" class="ui primary button" v-on:click="login">Submit</button>
+    </div>
 </template>
 
 <script>
