@@ -19,6 +19,7 @@
                 <b-tab title="View expenses" ><expenses-table></expenses-table></b-tab>
                 <b-tab title="Add Category"><add-category></add-category></b-tab>
                 <b-tab title="Settings"><rename-category></rename-category></b-tab>
+                <b-tab title="Add Goal"><add-goal></add-goal></b-tab>
             </b-tabs>
         </b-card>
     </div>
@@ -31,6 +32,7 @@
     import AddCategory from "./AddCategory";
     import {AUTH_LOGOUT} from "../store/constants";
     import $store from "../store/modules/auth";
+    import addGoal from "./AddGoal"
 
     export default {
         name: "ExpenseView",
@@ -38,7 +40,8 @@
             ExpensesTable,
             ExpenseInputPlain,
             RenameCategory,
-            AddCategory
+            AddCategory,
+            addGoal
     },
         data() {
             return {

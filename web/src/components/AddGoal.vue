@@ -1,7 +1,7 @@
 <template>
     <div class="container" id="AddGoal">
         <div class="row">
-            <b-button @click="send()" variant="outline-primary">Add category</b-button>
+            <b-button @click="send()" variant="outline-primary">Add Goal</b-button>
             <p>{{message}}</p>
         </div>
     </div>

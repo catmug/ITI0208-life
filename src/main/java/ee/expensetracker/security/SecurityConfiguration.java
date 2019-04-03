@@ -2,6 +2,7 @@ package ee.expensetracker.security;
 
 import ee.expensetracker.config.CustomAuthenticationFailureHandler;
 import ee.expensetracker.config.CustomAuthenticationSuccessHandler;
+import ee.expensetracker.config.MyCustomSuccessHandler;
 import ee.expensetracker.service.UserDetailServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +61,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(new CustomAuthenticationSuccessHandler())
-                .failureHandler(new CustomAuthenticationFailureHandler());
+                .failureHandler(new CustomAuthenticationFailureHandler())
+                .and()
+                .logout()
+                .deleteCookies("remove")
+                .invalidateHttpSession(true)
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(new MyCustomSuccessHandler())
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Bean
