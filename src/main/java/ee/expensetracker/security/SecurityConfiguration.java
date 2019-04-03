@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/register", "user").permitAll()
+                .antMatchers("/login", "/register", "api/login", "api/register", "api/up", "up", "/api/login", "/api/register", "/api/up", "/up").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -75,7 +75,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:9000", "http://localhost:8080"));
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+
+//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:9000", "http://localhost:8080", "*"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
