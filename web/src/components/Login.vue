@@ -1,10 +1,10 @@
 <template>
-    <div id="login">
+    <form id="login" v-on:submit.prevent="login">
         <h1 class="my-2">Login</h1>
         <input type='text' placeholder='username' v-model='username'>
         <input type='password' placeholder='password' v-model='password'>
-        <button type="submit" class="ui primary button" v-on:click="login">Submit</button>
-    </div>
+        <button class="ui primary button">Submit</button>
+    </form>
 </template>
 
 <script>

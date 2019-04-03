@@ -1,19 +1,19 @@
 <template>
-    <div>
+    <div class="expense-input">
         <div class="form-group">
             <input type="number" v-model="expense.amount" aria-describedby="amountHelp" class="form-control"
-                   placeholder="Amount">
+                   placeholder="Amount" data-cy="expense-amount">
             <small id="amountHelp" class="form-text text-muted">How much you spent</small>
         </div>
         <div class="form-group">
 
-            <input v-model="expense.comment" type="text" class="form-control" placeholder="Comment">
+            <input v-model="expense.comment" type="text" class="form-control" placeholder="Comment" data-cy="expense-comment">
 
         </div>
         <div class="form-group">
             <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
         </div>
-        <button class="btn btn-outline-primary" @click="send">save</button>
+        <button class="btn btn-outline-primary" data-cy="submit" @click="send">save</button>
         <p>{{message}}</p>
     </div>
 
