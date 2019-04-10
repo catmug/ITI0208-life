@@ -2,6 +2,9 @@ import {AUTH_REQUEST} from "../constants";
 import {AUTH_REGISTER} from "../constants";
 import {AUTH_LOGOUT} from "../constants";
 import axios from "axios";
+import router from '../../router'
+
+
 
 const state = {user: localStorage.getItem('user') || ''};
 
@@ -44,6 +47,8 @@ const mutations = {
         }).then(response => {
             state.user = user;
             localStorage.setItem('user', user);
+            router.push('/expense')
+
         }).catch(error => {
             state.user = '';
             localStorage.removeItem('user');
