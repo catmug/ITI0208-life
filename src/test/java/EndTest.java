@@ -21,4 +21,31 @@ public class EndTest extends AbstractTest {
     protected String getBaseUrl() {
         return BASE_URL;
     }
+
+
+    @Test
+    public void so_green() {
+        boolean isSuccess = sendRequest(getBaseUrl());
+
+        assertThat(isSuccess, is(true));
+    }
+    @Test
+    public void adding_test_ofUrl() {
+        boolean isSuccess = sendRequest(getBaseUrl());
+
+        assertThat(isSuccess, is(true));
+    }
+    @Test
+    public void added_value() {
+        boolean isSuccess = sendRequest(getBaseUrl());
+
+        assertThat(isSuccess, is(true));
+    }
+    @Test
+    public void baseUrlRespondsTest() {
+        boolean isSuccess = sendRequest(getBaseUrl());
+
+        assertThat(isSuccess, is(true));
+    }
+
 }
