@@ -1,10 +1,10 @@
 <template>
-    <form id="login" v-on:submit.prevent="login">
+    <div id="login">
         <h1 class="my-2">Login</h1>
-        <input type='text' placeholder='username' v-model='username'>
-        <input type='password' placeholder='password' v-model='password'>
-        <button class="ui primary button">Submit</button>
-    </form>
+        <input type='text' class="text-field" placeholder='username' v-model='username'>
+        <input type='password' class="text-field ml-1" placeholder='password' v-model='password'>
+        <button class="btn-primary ml-1" v-on:click="login">Submit</button>
+    </div>
 </template>
 
 <script>
@@ -21,8 +21,11 @@
         methods: {
             login () {
                 const { username, password } = this;
-                this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {
-                    this.$router.push('/expense');
+                this.$store.dispatch(AUTH_REQUEST, {username, password}).then((data2) => {
+                    console.log("________________");
+                    console.log(data2);
+                    // this.$store.dispatch('goToMain')
+                    // this.$router.push('/expense');
                 });
             }
         }

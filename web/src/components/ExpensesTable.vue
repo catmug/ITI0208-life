@@ -1,14 +1,8 @@
 <template>
     <div>
         <b-button @click="updateTable">All</b-button>
-        <label>Kategooria kaupa sorteerimine</label>
+        <label class="text-info ml-1"> Sort by category</label>
         <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
-        <b-pagination
-                v-model="currentPage"
-                :total-rows="rows"
-                :per-page="perPage"
-                aria-controls="expenseTable"
-        />
         <b-table
                 id="expenseTable"
                 striped
@@ -24,11 +18,17 @@
                 <b-button size="sm" @click="info(row.item, row.index, $event.target)">
                     Edit
                 </b-button>
-                <b-button size="sm" @click="deleteExpense(row.item)">
+                <b-button size="sm" class="ml-1" @click="deleteExpense(row.item)">
                     Remove
                 </b-button>
             </template>
         </b-table>
+        <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="expenseTable"
+        />
         <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
                 <!--<div>-->
                 <div class="form-group">
@@ -80,7 +80,7 @@
                     categoryId: 0,
                 },
                 message: '',
-                perPage: 2,
+                perPage: 5,
                 currentPage: 1
             }
         },

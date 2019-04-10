@@ -5,6 +5,7 @@
                 <b-navbar-nav>
                     <b-navbar-brand href="#">Expense tracker</b-navbar-brand>
                 </b-navbar-nav>
+                <!--<span left>Your goal: {{goal}} </span>-->
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item-dropdown :text= "username" left>
                         <b-dropdown-item href="#">Settings</b-dropdown-item>
@@ -33,6 +34,7 @@
     import {AUTH_LOGOUT} from "../store/constants";
     import $store from "../store/modules/auth";
     import addGoal from "./AddGoal"
+    import axios from "axios";
 
     export default {
         name: "ExpenseView",
@@ -46,7 +48,8 @@
         data() {
             return {
                 hello: null,
-                username: $store.state.user.username
+                username: $store.state.user.username,
+                goal: 0
             }
         },
         methods: {
@@ -56,7 +59,9 @@
                 })
             }
         },
-        mounted () {
+        beforeUpdate () {
+            axios.get("http://localhost:8080/api/goal")
+                .then(response => (this.goal = response.data));
         }
     }
 </script>
