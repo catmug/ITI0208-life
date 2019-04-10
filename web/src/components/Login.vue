@@ -21,11 +21,7 @@
         methods: {
             login () {
                 const { username, password } = this;
-                this.$store.dispatch(AUTH_REQUEST, {username, password}).then((data2) => {
-                    console.log("________________");
-                    console.log(data2);
-                    // this.$store.dispatch('goToMain')
-                    // this.$router.push('/expense');
+                this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {
                 });
             }
         }
