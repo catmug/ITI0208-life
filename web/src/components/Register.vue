@@ -1,13 +1,28 @@
 <template>
-    <div>
-        <h2>Register</h2>
-        <form id="register" v-on:submit.prevent="register">
-            <input type='text' placeholder='username' v-model='username'>
-            <input type='password' placeholder='password' v-model='password'>
-            <button class="ui primary button">Register</button>
-        </form>
-    </div>
+        <b-container lg="12" class="my-5">
+            <b-row align-h="center" class="mb-3">
+                <h2>Register</h2>
+            </b-row>
+            <b-row align-h="center">
+                <b-col lg="6">
+                    <b-form id="login" v-on:submit.prevent="register">
+                        <b-form-group>
+                            <b-form-input type='text' placeholder='username' v-model='username' required/>
+                        </b-form-group>
+
+                        <b-form-group>
+                            <b-form-input type='password' placeholder='password' v-model='password' required/>
+                        </b-form-group>
+
+                        <div class="text-center">
+                            <b-button class="mb-3" type="submit" variant="primary" block>Register</b-button>
+                        </div>
+                    </b-form>
+                </b-col>
+            </b-row>
+        </b-container>
 </template>
+
 
 <script>
     import {AUTH_REGISTER} from "../store/constants";

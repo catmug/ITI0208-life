@@ -1,10 +1,24 @@
 <template>
-    <div id="login">
-        <h1 class="my-2">Login</h1>
-        <input type='text' class="text-field" placeholder='username' v-model='username'>
-        <input type='password' class="text-field ml-1" placeholder='password' v-model='password'>
-        <button class="btn-primary ml-1" v-on:click="login">Submit</button>
-    </div>
+    <b-container lg="12" class="my-5">
+        <b-row align-h="center">
+            <b-col lg="6">
+                <b-form id="login" v-on:submit.prevent="login">
+                    <b-form-group>
+                        <b-form-input type='text' placeholder='username' v-model='username' required/>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <b-form-input type='password' placeholder='password' v-model='password' required/>
+                    </b-form-group>
+
+                    <div class="text-center">
+                        <b-button class="mb-3" type="submit" variant="primary" block>Sign In</b-button>
+                        <router-link to="/register">Sign up?</router-link>
+                    </div>
+                </b-form>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
