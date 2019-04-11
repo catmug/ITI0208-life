@@ -4,7 +4,6 @@
         <option v-for="option in categories" :value="option.categoryId" :key="option.categoryId">{{ option.name }}</option>
     </select>
 </template>
-
 <script>
     import axios from "axios";
 
