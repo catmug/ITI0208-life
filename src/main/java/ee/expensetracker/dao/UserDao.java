@@ -39,6 +39,14 @@ public class UserDao {
         return id;
     }
 
+    public boolean doesUsernameExist (String username) {
+       Long count = (Long) em.createQuery(
+               "select count(u) from User u where u.username = :username").setParameter("username", username).getSingleResult();
+
+        User u = findUserByUsername(username);
+        return (count != (0L));
+    }
+
 
     public List<User> findAll() {
         return em.createQuery(

@@ -1,5 +1,6 @@
 <template>
     <b-container lg="12" class="my-5">
+
         <b-row align-h="center">
             <b-col lg="6">
                 <b-form id="login" v-on:submit.prevent="login">
