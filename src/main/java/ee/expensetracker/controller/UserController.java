@@ -33,6 +33,11 @@ public class UserController {
         return userdao.getUserById(id);
     }
 
+    @GetMapping("user/exists/{username}")
+    public boolean doesUserExist(@PathVariable("username") String username) {
+        return userdao.doesUsernameExist(username);
+    }
+
     @GetMapping("user/{username}")
     public User getById(@PathVariable("username") String username) {
         return userdao.findUserByUsername(username);
