@@ -1,15 +1,40 @@
 <template>
     <b-container lg="12" class="my-5">
-
+        <b-row align-h="center" class="mb-3">
+            <h2>Login</h2>
+        </b-row>
         <b-row align-h="center">
             <b-col lg="6">
-                <b-form id="login" v-on:submit.prevent="login">
+                <b-form id="login" v-on:submit.prevent="validateForm">
                     <b-form-group>
-                        <b-form-input type='text' placeholder='username' v-model='username' required/>
+                        <b-form-input
+                                type='text'
+                                placeholder='username'
+                                v-model='username'
+                                name="username"
+                                v-validate="'required'"
+                                :class="{ 'is-invalid': submitted && errors.has('username') }"/>
+                        <div
+                                v-if="submitted && errors.has('username')"
+                                class="invalid-feedback">
+                            <p class="mb-0">{{ errors.first('username') }}</p>
+                        </div>
                     </b-form-group>
 
                     <b-form-group>
-                        <b-form-input type='password' placeholder='password' v-model='password' required/>
+                        <b-form-input
+                                type='password'
+                                placeholder='password'
+                                v-model='password'
+                                name="password"
+                                v-validate="'required'"
+                                :class="{ 'is-invalid': submitted && errors.has('password') }"/>
+
+                        <div
+                                v-if="submitted && errors.has('username')"
+                                class="invalid-feedback">
+                            <p class="mb-0">{{ errors.first('password') }}</p>
+                        </div>
                     </b-form-group>
 
                     <div class="text-center">
@@ -29,11 +54,21 @@
         name: 'login',
         data() {
             return {
+                submitted: false,
                 username: '',
-                password: ''
+                password: '',
+
             }
         },
         methods: {
+            validateForm: function (e) {
+                this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        this.login();
+                    }
+                });
+            },
             login () {
                 const { username, password } = this;
                 this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {

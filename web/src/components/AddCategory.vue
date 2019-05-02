@@ -4,7 +4,7 @@
             <div class="col-8"><p class="text-danger">{{ errors.first('category name') }}&nbsp; </p></div>
         </div>
         <div class="row pb-1">
-            <div class="col-4"><input class="form-control" v-validate.disable="'required|min:3'" name="category name"
+            <div class="col-4"><input class="form-control" v-validate.disable="'required|min:3|alpha_num'" name="category name"
                                       v-model="category.name" type="text">
             </div>
         </div>
