@@ -4,22 +4,16 @@
             <h2>Register</h2>
         </b-row>
         <b-row align-h="center">
-            <p v-if="errors.length">
-                <b>Please correct the following error(s):</b>
-            <ul>
-                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-            </ul>
-            </p>
-        </b-row>
-        <b-row align-h="center">
             <b-col lg="6">
-                <b-form id="login" v-on:submit.prevent="checkForm">
+                <b-form v-on:submit.prevent="validateForm">
                     <b-form-group>
-                        <b-form-input type='text' placeholder='username' v-model='username' required/>
+                        <b-form-input type='text' v-validate="'required|alpha_num|min:4|max:30'" placeholder='username' name="username" id="username" v-model='username' :class="{ 'is-invalid': submitted && errors.has('username') }"/>
+                        <div v-if="submitted && errors.has('username')" class="invalid-feedback"><p class="mb-0">{{ errors.first('username') }}</p></div>
                     </b-form-group>
 
                     <b-form-group>
-                        <b-form-input type='password' placeholder='password' v-model='password' required/>
+                        <b-form-input type='password' v-validate="'required|min:8|max:20'" id="password" name="password" placeholder='password' v-model='password' :class="{ 'is-invalid': submitted && errors.has('password') }"/>
+                        <div v-if="submitted && errors.has('password')" class="invalid-feedback"><p>{{ errors.first('password') }}</p></div>
                     </b-form-group>
 
                     <div class="text-center">
@@ -40,39 +34,20 @@
         name: 'register',
         data() {
             return {
-                errors: [],
+                submitted: false,
                 username: '',
                 password: ''
 
             }
         },
         methods: {
-            checkForm: function (e) {
-                this.errors = [];
-
-                if (!this.password) {
-                    this.errors.push('Password required.');
-                } else if (this.password.length < 6 || this.password.length > 20) {
-                    this.errors.push('The password should be between 6 to 20 characters.')
-                }
-
-                if (!this.username) {
-                    this.errors.push("Username required.");
-                } else if (this.username.match("^\w+$")) {
-                    this.errors.push('The username may only include letters and digits.')
-                } else {
-                    axios.get('http://localhost:8080/api/user/exists/' + this.username).then(response => {
-                        if (response.data === true) {
-                            this.errors.push('The username is already taken!')
-                        }
-                    });
-                }
-
-                if (this.errors.length === 0) {
-                    this.register();
-                }
-
-                e.preventDefault();
+            validateForm: function (e) {
+                this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                       this.register();
+                    }
+                });
             },
             register() {
                 const {username, password} = this;

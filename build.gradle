@@ -7,6 +7,7 @@ buildscript {
     }
 }
 
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
@@ -48,4 +49,24 @@ dependencies {
 
     testCompile('junit:junit:4.12')
     testCompile('org.hamcrest:hamcrest-all:1.3')
+}
+
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
+
+task intro {
+    dependsOn hello
+    doLast {
+        println "I'm Gradle"
+    }
+}
+
+task moveJar (type : Copy) {
+    dependsOn intro
+    from bootJar
+    into 'C:\\Users\\krist\\Desktop'
+    rename 'lifeisgood-0.1.0', 'ExpenseTracker'
 }
