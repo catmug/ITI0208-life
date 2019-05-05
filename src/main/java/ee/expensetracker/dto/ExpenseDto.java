@@ -21,6 +21,7 @@ public class ExpenseDto {
     private String insertTime;
     private String comment;
     private double amount;
+    private String categoryName;
 
     public LocalDateTime getInsertionDateConverted() throws ParseException {
         return LocalDateTime.parse(this.insertTime, formatter);
