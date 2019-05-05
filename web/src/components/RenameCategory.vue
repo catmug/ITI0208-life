@@ -1,18 +1,37 @@
 <template>
-    <div>
-        <div class="form-group">
-            <label>Select category to rename:</label>
-            <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
-        </div>
-        <div class="form-group">
-            <input class="form-control" v-model="category.name" type="text">
-        </div>
-        <div class="form-group">
-            <b-button @click="editCategory" variant="outline-primary">Rename Category</b-button>
-        </div>
-        <p>{{message}}</p>
 
-    </div>
+    <b-container fluid>
+        <b-row>
+            <b-col>
+                <b-form>
+                    <b-form-group>
+                        <CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>
+                    </b-form-group>
+                    <b-form-group>
+                        <b-form-input
+                                type="text"
+                                v-model="category.name"
+                                v-validate="'required|min:3|alpha_num'"
+                                name="category name"
+                                :class="{ 'is-invalid': submitted && errors.has('category name') }"/>
+                        <div
+                                v-if="submitted && errors.has('category name')"
+                                class="invalid-feedback">
+                            <p class="mb-0">{{ errors.first('category name') }}</p>
+                        </div>
+                    </b-form-group>
+                </b-form>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <div>
+                    <b-button class="float-right" @click="validateForm" variant="outline-primary">Rename Category</b-button>
+                </div>
+                <p class="text-success">{{message}}</p>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -25,6 +44,7 @@
         success: false,
         data() {
             return {
+                submitted: false,
                 message: '',
                 category: {
                     categoryId: 0,
@@ -34,15 +54,31 @@
         },
         components: {CategoryDropdown},
         methods: {
+            validateForm: function (e) {
+                this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        this.editCategory();
+                    }
+                });
+            },
             editCategory() {
                 axios.post('http://localhost:8080/api/category/rename', this.category)
                     .then(response => (this.success = response.data.success));
-                this.message = 'Category updated to ' + this.category.name
+                this.message = 'Category name has been updated to ' + this.category.name
+                window.setTimeout(this.closeMsg, 3000);
             },
 
             getSelectedCategory(e) {
                 this.category.categoryId = e;
-            }
+            },
+
+            closeMsg() {
+                document.getElementById("msg").style.display = " none";
+                this.submitted = false;
+                this.category.categoryId = 0;
+                this.category.name = '';
+            },
         },
     }
 </script>

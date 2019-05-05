@@ -1,8 +1,22 @@
 <template>
-    <div>
-        <b-button @click="updateTable">All</b-button>
-        <label class="text-info ml-1"> Sort by category</label>
-        <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
+    <div class="container">
+        <div>
+            <b-card no-body style="border: none">
+                <b-tabs card>
+                    <b-tab title="All" @click="updateTable" active></b-tab>
+                    <b-tab title="By Category">
+                        <b-card-text>
+                            <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
+                        </b-card-text>
+                    </b-tab>
+                    <b-tab title="By Period">
+                        <b-card-text>
+                        </b-card-text>
+                    </b-tab>
+                </b-tabs>
+            </b-card>
+        </div>
+
         <b-table
                 id="expenseTable"
                 striped
@@ -28,31 +42,26 @@
                 :total-rows="rows"
                 :per-page="perPage"
                 aria-controls="expenseTable"
+                class="justify-content-center"
         />
         <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
-                <!--<div>-->
-                <div class="form-group">
-                    <input type="number" v-model="modalInfo.amount" aria-describedby="amountHelp" class="form-control"
-                           placeholder="Amount">
-                    <small id="amountHelp" class="form-text text-muted">How much you spent</small>
-                </div>
-                <div class="form-group">
+            <!--<div>-->
+            <div class="form-group">
+                <input type="number" v-model="modalInfo.amount" aria-describedby="amountHelp" class="form-control"
+                       placeholder="Amount">
+                <small id="amountHelp" class="form-text text-muted">How much you spent</small>
+            </div>
+            <div class="form-group">
 
-                    <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
+                <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
 
-                </div>
-                <div class="form-group">
-                    <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
-                </div>
-                <!--<button class="btn btn-primary" @click="send">save</button>-->
-                <b-button class="mt-3" variant="success" block @click="send">Save</b-button>
-            <p>{{message}}</p>
+            </div>
+            <div class="form-group">
+                <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
+            </div>
+            <p class="text-success">{{message}}</p>
+            <b-button class="mt-3" variant="primary" block @click="send">Save</b-button>
 
-                <!--<input v-model="modalInfo.amount">-->
-                    <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>-->
-                    <!--<input v-model="modalInfo.comment" type="text">-->
-                    <!--<button @click="send">save</button>-->
-                <!--</div>-->
 
         </b-modal>
     </div>
@@ -71,7 +80,7 @@
             return {
                 fields: [
                     {key: 'amount', label: 'Amount', sortable: true, sortDirection: 'desc'},
-                    {key: 'insertTime', label: 'Inseriton time', sortable: true, class: 'text-center'},
+                    {key: 'insertTime', label: 'Insertion time', sortable: true, class: 'text-center'},
                     {key: 'actions', label: ''}
                 ],
                 expenses: [],
@@ -91,7 +100,7 @@
                 this.modalInfo.expenseId = item.expenseId;
                 this.modalInfo.amount = item.amount;
                 this.modalInfo.category = item.category;
-                this.modalInfo.comment= item.comment;
+                this.modalInfo.comment = item.comment;
 
                 this.$root.$emit('bv::show::modal', 'modalInfo', button)
             },
@@ -101,7 +110,8 @@
                 this.modalInfo.id = '';
                 this.modalInfo.amount = '';
                 this.modalInfo.category = '';
-                this.modalInfo.comment= '';
+                this.modalInfo.comment = '';
+                this.message = '';
 
             },
             getSelectedCategory(e) {
@@ -112,7 +122,7 @@
                 axios.post('http://localhost:8080/api/expense/edit',
                     this.modalInfo
                 ).then(response => (this.success = response.data,
-                                            this.updateTable()));
+                    this.updateTable()));
                 this.message = "The expense has been updated!"
             },
             updateTable() {
@@ -122,7 +132,7 @@
             deleteExpense(item) {
                 axios.delete("http://localhost:8080/api/expense/" + item.expenseId)
                     .then(response => (this.success = response.data.success,
-                                            this.updateTable()));
+                        this.updateTable()));
             },
             getExpensesByCategory(id) {
                 axios.get("http://localhost:8080/api/expense/" + id)
