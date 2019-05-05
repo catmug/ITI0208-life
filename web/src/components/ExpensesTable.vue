@@ -52,12 +52,11 @@
                 <small id="amountHelp" class="form-text text-muted">How much you spent</small>
             </div>
             <div class="form-group">
-
                 <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
-
             </div>
             <div class="form-group">
-                <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
+                <CategoryDropdown :selectedCategory=modalInfo.category class="form-control"
+                                  @on-change="getSelectedCategory"></CategoryDropdown>
             </div>
             <p class="text-success">{{message}}</p>
             <b-button class="mt-3" variant="primary" block @click="send">Save</b-button>
@@ -81,6 +80,7 @@
                 fields: [
                     {key: 'amount', label: 'Amount', sortable: true, sortDirection: 'desc'},
                     {key: 'insertTime', label: 'Insertion time', sortable: true, class: 'text-center'},
+                    {key: 'categoryName', label: 'Category', sortable: true},
                     {key: 'actions', label: ''}
                 ],
                 expenses: [],
@@ -101,7 +101,6 @@
                 this.modalInfo.amount = item.amount;
                 this.modalInfo.category = item.category;
                 this.modalInfo.comment = item.comment;
-
                 this.$root.$emit('bv::show::modal', 'modalInfo', button)
             },
             resetModal() {
@@ -112,7 +111,6 @@
                 this.modalInfo.category = '';
                 this.modalInfo.comment = '';
                 this.message = '';
-
             },
             getSelectedCategory(e) {
                 this.modalInfo.category = e;
@@ -151,5 +149,4 @@
 </script>
 
 <style scoped>
-
 </style>
