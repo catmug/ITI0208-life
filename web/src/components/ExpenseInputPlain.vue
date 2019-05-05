@@ -17,7 +17,7 @@
         </div>
 
         <button class="btn btn-outline-primary float-right mb-4" data-cy="submit" @click="send">Save</button>
-        <p class="float-left">{{message}}</p>
+        <p class="float-left text-success" id="msg">{{message}}</p>
     </div>
 
 </template>
@@ -42,14 +42,21 @@
         },
         methods: {
             send() {
-                axios.post('http://localhost:8080/api/expense',
-                    this.expense
+                axios.post('http://localhost:8080/api/expense', this.expense
                 ).then(response => (this.success = response.data));
                 this.message = 'New Expense has been added';
+                window.setTimeout(this.closeMsg, 3000);
             },
             getSelectedCategory(e) {
                 this.expense.categoryId = e;
-            }
+            },
+            closeMsg() {
+                document.getElementById("msg").style.display = " none";
+                this.submitted = false;
+                this.expense.amount = 0;
+                this.expense.comment = '';
+                this.expense.categoryId = 0
+            },
         }
     }
 </script>

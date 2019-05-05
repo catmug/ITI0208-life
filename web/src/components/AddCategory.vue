@@ -21,7 +21,7 @@
         </b-row>
         <b-row>
             <b-col>
-                <p class="text-success">{{message}}</p>
+                <p class="text-success" id="msg">{{message}} </p>
             </b-col>
             <b-col class="justify-content-end">
                 <b-button class="float-right" @click="validateForm" variant="outline-primary">Add category</b-button>
@@ -59,9 +59,18 @@
                 let req = axios.post('http://localhost:8080/api/category', this.category)
                     .then(response => (this.success = response.data.success));
                 this.message = 'The category ' + this.category.name + ' has been added!';
+                window.setTimeout(this.closeMsg, 3000);
 
-            }
-        }
+            },
+
+            closeMsg() {
+                document.getElementById("msg").style.display = " none";
+                this.submitted = false;
+                this.category.name = '';
+            },
+
+
+    }
     }
 </script>
 
