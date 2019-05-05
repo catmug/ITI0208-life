@@ -1,24 +1,33 @@
 <template>
-    <div class="container">
-        <div class="row pb-1">
-            <div class="col-8"><p class="text-danger">{{ errors.first('category name') }}&nbsp; </p></div>
-        </div>
-        <div class="row pb-1">
-            <div class="col-4"><input class="form-control" v-validate.disable="'required|min:3|alpha_num'" name="category name"
-                                      v-model="category.name" type="text">
-            </div>
-        </div>
-        <div class="row my-2">
-            <div class="col">
-                <b-button @click="validateForm" variant="outline-primary">Add category</b-button>
-            </div>
-        </div>
-        <div class="row my-2">
-            <div class="col">
+    <b-container fluid>
+        <b-row>
+            <b-col>
+                <b-form>
+                    <b-form-group>
+                        <b-form-input
+                                type="text"
+                                placeholder="Category name"
+                                v-model="category.name"
+                                v-validate="'required|min:3|alpha_num'"
+                                name="category name"
+                                :class="{ 'is-invalid': submitted && errors.has('category name') }"
+                        />
+                    </b-form-group>
+                    <div v-if="submitted && errors.has('category name')">
+                        <p class="text-danger">{{ errors.first('category name') }}</p>
+                    </div>
+                </b-form>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
                 <p class="text-success">{{message}}</p>
-            </div>
-        </div>
-    </div>
+            </b-col>
+            <b-col class="justify-content-end">
+                <b-button class="float-right" @click="validateForm" variant="outline-primary">Add category</b-button>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -29,6 +38,7 @@
         name: "AddCategory",
         data() {
             return {
+                submitted: false,
                 success: '',
                 message: '',
                 category: {
@@ -38,6 +48,7 @@
         },
         methods: {
             validateForm() {
+                this.submitted = true;
                 this.$validator.validateAll().then(valid => {
                     if (valid) {
                         this.send()

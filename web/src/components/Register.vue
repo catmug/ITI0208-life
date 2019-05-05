@@ -7,13 +7,26 @@
             <b-col lg="6">
                 <b-form v-on:submit.prevent="validateForm">
                     <b-form-group>
-                        <b-form-input type='text' v-validate="'required|alpha_num|min:4|max:30'" placeholder='username' name="username" id="username" v-model='username' :class="{ 'is-invalid': submitted && errors.has('username') }"/>
-                        <div v-if="submitted && errors.has('username')" class="invalid-feedback"><p class="mb-0">{{ errors.first('username') }}</p></div>
+                        <b-form-input
+                                type='text'
+                                v-validate="'required|alpha_num|min:4|max:30'"
+                                placeholder='username' name="username" id="username"
+                                v-model='username'
+                                :class="{ 'is-invalid': submitted && errors.has('username') }"/>
+                        <div
+                                v-if="submitted && errors.has('username')"
+                                class="invalid-feedback"><p class="mb-0">{{ errors.first('username') }}</p></div>
                     </b-form-group>
 
                     <b-form-group>
-                        <b-form-input type='password' v-validate="'required|min:8|max:20'" id="password" name="password" placeholder='password' v-model='password' :class="{ 'is-invalid': submitted && errors.has('password') }"/>
-                        <div v-if="submitted && errors.has('password')" class="invalid-feedback"><p>{{ errors.first('password') }}</p></div>
+                        <b-form-input
+                                type='password'
+                                v-validate="'required|min:8|max:20'"
+                                id="password" name="password" placeholder='password'
+                                v-model='password' :class="{ 'is-invalid': submitted && errors.has('password') }"/>
+                        <div
+                                v-if="submitted && errors.has('password')"
+                                class="invalid-feedback"><p>{{ errors.first('password') }}</p></div>
                     </b-form-group>
 
                     <div class="text-center">

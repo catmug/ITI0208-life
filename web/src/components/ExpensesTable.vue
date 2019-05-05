@@ -1,8 +1,19 @@
 <template>
-    <div>
-        <b-button @click="updateTable">All</b-button>
-        <label class="text-info ml-1"> Sort by category</label>
-        <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
+    <div class="container">
+        <div>
+            <b-card no-body style="border: none">
+                <b-tabs card>
+                    <b-tab title="All" @click="updateTable" active></b-tab>
+                    <b-tab title="By Category">
+                        <b-card-text><category-dropdown @on-change="getExpensesByCategory"></category-dropdown></b-card-text>
+                    </b-tab>
+                    <b-tab title="By Period">
+
+                    </b-tab>
+                </b-tabs>
+            </b-card>
+        </div>
+
         <b-table
                 id="expenseTable"
                 striped
@@ -28,6 +39,7 @@
                 :total-rows="rows"
                 :per-page="perPage"
                 aria-controls="expenseTable"
+                class="justify-content-center"
         />
         <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
                 <!--<div>-->
@@ -47,12 +59,6 @@
                 <!--<button class="btn btn-primary" @click="send">save</button>-->
                 <b-button class="mt-3" variant="success" block @click="send">Save</b-button>
             <p>{{message}}</p>
-
-                <!--<input v-model="modalInfo.amount">-->
-                    <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>-->
-                    <!--<input v-model="modalInfo.comment" type="text">-->
-                    <!--<button @click="send">save</button>-->
-                <!--</div>-->
 
         </b-modal>
     </div>

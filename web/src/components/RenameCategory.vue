@@ -8,7 +8,7 @@
             <input class="form-control" v-model="category.name" type="text">
         </div>
         <div class="form-group">
-            <b-button @click="editCategory" variant="outline-primary">Rename Category</b-button>
+            <b-button class="float-right" @click="editCategory" variant="outline-primary">Rename Category</b-button>
         </div>
         <p>{{message}}</p>
 

@@ -22,12 +22,13 @@ $grid-breakpoints: (
 
 
 $custom-background: #374785;
-$custom-background-dark: #24305E;
-$custom-main: #A8D0E6;
-$custom-main-dark: #374785;
+$custom-background-dark: #fafff3;
+$custom-main: #e6c3de;
+$custom-main-dark: #a87e9b;
 $custom-error: #F76C6C;
 $custom-warn: #F8E9A1;
 $custom-success: #00887A;
+$text-dark: #4b1444;
 
 $theme-colors: (
   "primary": $custom-main-dark,
@@ -40,7 +41,15 @@ $theme-colors: (
   "dark": $custom-background-dark
 )!default;
 
+html *{
+  font-family: ff-tisa-sans-web-pro, sans-serif !important;
+  font-style: normal;
+  font-weight: 100;
+}
 
-
+.navbar--purple{
+  background-color: $custom-background-dark;
+  color: $text-dark;
+}
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';
