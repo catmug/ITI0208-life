@@ -15,6 +15,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -72,5 +73,46 @@ public class ExpenseDao implements Dao {
     public List<Expense> findAllByPeriod() {
 
         return Collections.emptyList();
+    }
+
+    public List<Expense> findLastWeekExpenses() {
+        long id = userDao.getLoggedInUserId();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime weekAgo = now.minusDays(7L);
+        return em.createQuery(
+                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
+                Expense.class)
+                .setParameter("id", id)
+                .setParameter("start", now)
+                .setParameter("end", weekAgo)
+                .getResultList();
+    }
+
+    public List<Expense> findLastMonthExpenses() {
+        long id = userDao.getLoggedInUserId();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime weekAgo = now.minusMonths(1L);
+        return em.createQuery(
+                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
+                Expense.class)
+                .setParameter("id", id)
+                .setParameter("start", now)
+                .setParameter("end", weekAgo)
+                .getResultList();
+    }
+
+    public List<Expense> findCustomTimeExpenses(List<String> dates) {
+        long id = userDao.getLoggedInUserId();
+        System.out.println(dates);
+        LocalDateTime start = LocalDateTime.parse(dates.get(0));
+        LocalDateTime end = LocalDateTime.parse(dates.get(1));
+        List<Expense> foo =  em.createQuery(
+                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
+                Expense.class)
+                .setParameter("id", id)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .getResultList();
+        return foo;
     }
 }

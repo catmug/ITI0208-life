@@ -46,6 +46,36 @@ public class ExpenseController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("expense/week")
+    public List<ExpenseDto> getWeeksExpenses() {
+        return dao.findLastWeekExpenses().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("expense/month")
+    public List<ExpenseDto> getMonthsExpenses() {
+        return dao.findLastMonthExpenses().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("expense/custom")
+    public List<ExpenseDto> getCustomExpenses(@RequestParam("start") String start,
+                                              @RequestParam("end") String end) {
+        System.out.println("Got em in controller!\n");
+        System.out.println(start);
+        System.out.println(end);
+        LocalDateTime startLdt = LocalDateTime.parse(start);
+        LocalDateTime endLdt = LocalDateTime.parse(end);
+        System.out.println(startLdt);
+        System.out.println(endLdt);
+        return null;
+//        return dao.findCustomTimeExpenses(dates).stream()
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
+    }
+
     @GetMapping("expense/{id}")
     public List<ExpenseDto> getExpenses(@PathVariable("id") Long id) {
         return dao.findAllByCategory(id).stream()

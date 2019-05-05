@@ -1,22 +1,14 @@
 <template>
-    <div class="container">
-        <div>
-            <b-card no-body style="border: none">
-                <b-tabs card>
-                    <b-tab title="All" @click="updateTable" active></b-tab>
-                    <b-tab title="By Category">
-                        <b-card-text>
-                            <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
-                        </b-card-text>
-                    </b-tab>
-                    <b-tab title="By Period">
-                        <b-card-text>
-                        </b-card-text>
-                    </b-tab>
-                </b-tabs>
-            </b-card>
-        </div>
-
+    <div>
+        <b-button @click="updateTable">All</b-button>
+        <b-button @click="getLastWeekExpenses">Last week</b-button>
+        <b-button @click="getLastMonthExpenses">Last month</b-button>
+        <label class="text-info ml-1"> Sort by category</label>
+        <category-dropdown @on-change="getExpensesByCategory"></category-dropdown>
+<!--        <date-picker v-model="dates" @change="testDate()" type="date" range lang="en" format="YYYY-MM-DD" confirm></date-picker>-->
+<!--        <datepicker v-model="temp">Choose a date</datepicker>-->
+        <p>{{ temp }}</p>
+<!--        <p>{{ dates }}</p>-->
         <b-table
                 id="expenseTable"
                 striped
@@ -42,26 +34,31 @@
                 :total-rows="rows"
                 :per-page="perPage"
                 aria-controls="expenseTable"
-                class="justify-content-center"
         />
         <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" hide-footer>
-            <!--<div>-->
-            <div class="form-group">
-                <input type="number" v-model="modalInfo.amount" aria-describedby="amountHelp" class="form-control"
-                       placeholder="Amount">
-                <small id="amountHelp" class="form-text text-muted">How much you spent</small>
-            </div>
-            <div class="form-group">
+                <!--<div>-->
+                <div class="form-group">
+                    <input type="number" v-model="modalInfo.amount" aria-describedby="amountHelp" class="form-control"
+                           placeholder="Amount">
+                    <small id="amountHelp" class="form-text text-muted">How much you spent</small>
+                </div>
+                <div class="form-group">
 
-                <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
+                    <input v-model="modalInfo.comment" type="text" class="form-control" placeholder="Comment">
 
-            </div>
-            <div class="form-group">
-                <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
-            </div>
-            <p class="text-success">{{message}}</p>
-            <b-button class="mt-3" variant="primary" block @click="send">Save</b-button>
+                </div>
+                <div class="form-group">
+                    <CategoryDropdown class="form-control" @on-change="getSelectedCategory"></CategoryDropdown>
+                </div>
+                <!--<button class="btn btn-primary" @click="send">save</button>-->
+                <b-button class="mt-3" variant="success" block @click="send">Save</b-button>
+            <p>{{message}}</p>
 
+                <!--<input v-model="modalInfo.amount">-->
+                    <!--<CategoryDropdown @on-change="getSelectedCategory"></CategoryDropdown>-->
+                    <!--<input v-model="modalInfo.comment" type="text">-->
+                    <!--<button @click="send">save</button>-->
+                <!--</div>-->
 
         </b-modal>
     </div>
@@ -70,11 +67,17 @@
 <script>
     import axios from "axios";
     import CategoryDropdown from "./CategoryDropdown";
+    import DatePicker from 'vue2-datepicker'
+    import Datepicker from 'vuejs-datepicker';
+    import VCalendar from "v-calendar/src/components/Calendar";
 
     export default {
         name: "ExpensesTable",
         components: {
+            VCalendar,
             CategoryDropdown,
+            DatePicker,
+            Datepicker
         },
         data() {
             return {
@@ -89,8 +92,10 @@
                     categoryId: 0,
                 },
                 message: '',
-                perPage: 5,
-                currentPage: 1
+                perPage: 10,
+                currentPage: 1,
+                dates: [],
+                temp: null
             }
         },
         methods: {
@@ -100,7 +105,7 @@
                 this.modalInfo.expenseId = item.expenseId;
                 this.modalInfo.amount = item.amount;
                 this.modalInfo.category = item.category;
-                this.modalInfo.comment = item.comment;
+                this.modalInfo.comment= item.comment;
 
                 this.$root.$emit('bv::show::modal', 'modalInfo', button)
             },
@@ -110,8 +115,7 @@
                 this.modalInfo.id = '';
                 this.modalInfo.amount = '';
                 this.modalInfo.category = '';
-                this.modalInfo.comment = '';
-                this.message = '';
+                this.modalInfo.comment= '';
 
             },
             getSelectedCategory(e) {
@@ -122,7 +126,7 @@
                 axios.post('http://localhost:8080/api/expense/edit',
                     this.modalInfo
                 ).then(response => (this.success = response.data,
-                    this.updateTable()));
+                                            this.updateTable()));
                 this.message = "The expense has been updated!"
             },
             updateTable() {
@@ -132,11 +136,29 @@
             deleteExpense(item) {
                 axios.delete("http://localhost:8080/api/expense/" + item.expenseId)
                     .then(response => (this.success = response.data.success,
-                        this.updateTable()));
+                                            this.updateTable()));
             },
             getExpensesByCategory(id) {
-                axios.get("http://localhost:8080/api/expense/" + id)
+                axios.get('http://localhost:8080/api/expense/' + id)
                     .then(response => (this.expenses = response.data));
+            },
+            getLastWeekExpenses() {
+                axios.get('http://localhost:8080/api/expense/week')
+                    .then(response => (this.expenses = response.data));
+            },
+            getLastMonthExpenses() {
+                axios.get('http://localhost:8080/api/expense/month')
+                    .then(response => (this.expenses = response.data));
+            },
+            testDate() {
+                console.log(this.dates);
+                axios.get('http://localhost:8080/api/expense/custom', {
+                    params: {
+                        start: this.dates[0],
+                        end: this.dates[1]
+                    }
+                }).
+                then(response => (this.expenses = response.data));
             }
         },
         mounted() {

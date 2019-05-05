@@ -8,3 +8,5 @@ INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, a
 INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 2, 1, '2017-08-16 09:37:38','toit1', 5);
 INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 2, 1, '2017-08-16 09:37:38','toit2', 10);
 INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 5, 1, '2017-08-16 09:37:38','mp3', 2000);
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 5, 1, '2019-04-16 09:37:38','ipad', 400);
+INSERT INTO expense(expense_id, category_id, user_id, insertion_time, comment, amount) VALUES (NEXT VALUE FOR seq_expense, 5, 1, '2019-04-01 09:37:38','autopesu', 40);
