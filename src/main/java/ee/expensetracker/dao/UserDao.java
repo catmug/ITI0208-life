@@ -22,11 +22,16 @@ public class UserDao {
     private EntityManager em;
 
     @Transactional
-    public void save(User user) {
-        if (user.getUserId() == null) {
-            em.persist(user);
+    public String save(User user) {
+        if (findByName(user.getUsername()).size() == 0) {
+            if (user.getUserId() == null) {
+                em.persist(user);
+            } else {
+                em.merge(user);
+            }
+            return "Category " + user.getUsername() + " added!";
         } else {
-            em.merge(user);
+            return "This category name already exists!";
         }
     }
 
@@ -72,5 +77,12 @@ public class UserDao {
         goal.setUser(user);
 
         em.persist(goal);
+    }
+
+    public List<User> findByName(String name) {
+        return em.createQuery(
+                "select u from User u where u.username = :name",
+                User.class)
+                .setParameter("name", name).getResultList();
     }
 }

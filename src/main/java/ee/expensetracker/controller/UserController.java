@@ -18,9 +18,9 @@ public class UserController {
     private PasswordEncoder pw;
 
     @PostMapping("register")
-    public void register(@RequestBody User u){
+    public String register(@RequestBody User u){
         u.setPassword(pw.encode(u.getPassword()));
-        userdao.save(u);
+        return userdao.save(u);
     }
 
     @GetMapping("user")

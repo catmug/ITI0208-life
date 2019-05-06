@@ -12,7 +12,7 @@
                     <b-tab title="By Period">
                         <b-card-text>
 <!--                            <date-picker v-model="temp" range type="date"></date-picker>-->
-                            <datepicker :inline="true" language="en"></datepicker>
+<!--                            <datepicker :inline="true" language="en"></datepicker>-->
                             <p>{{ temp }}</p>
                         </b-card-text>
                     </b-tab>
@@ -74,7 +74,6 @@
     import CategoryDropdown from "./CategoryDropdown";
     import DatePicker from 'vue2-datepicker'
     import Datepicker from 'vuejs-datepicker';
-    import en from 'vuejs-datepicker/dist/locale'
 
     export default {
         name: "ExpensesTable",
@@ -99,8 +98,7 @@
                 message: '',
                 perPage: 5,
                 currentPage: 1,
-                temp: null,
-                en: en
+                temp: null
             }
         },
         methods: {
