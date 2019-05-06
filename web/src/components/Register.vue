@@ -49,8 +49,8 @@
             return {
                 submitted: false,
                 username: '',
-                password: ''
-
+                password: '',
+                message: ''
             }
         },
         methods: {
