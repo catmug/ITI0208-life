@@ -39,7 +39,6 @@
         data() {
             return {
                 submitted: false,
-                success: '',
                 message: '',
                 category: {
                     name: '',
@@ -56,11 +55,11 @@
                 });
             },
             send() {
-                let req = axios.post('http://localhost:8080/api/category', this.category)
-                    .then(response => (this.success = response.data.success));
-                this.message = 'The category ' + this.category.name + ' has been added!';
+                axios.post('http://localhost:8080/api/category', this.category)
+                    .then(response => (this.message = response.data));
+                // this.message = 'The category ' + this.category.name + ' has been added!';
+                // console.log(this.success);
                 window.setTimeout(this.closeMsg, 3000);
-
             },
 
             closeMsg() {

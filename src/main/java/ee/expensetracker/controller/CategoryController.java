@@ -33,8 +33,10 @@ public class CategoryController {
     }
 
     @PostMapping("category")
-    public void save(@RequestBody CategoryDto category) throws ParseException {
-        dao.save(convertToModel(category));
+    public String save(@RequestBody CategoryDto category) throws ParseException {
+        String foo = dao.save(convertToModel(category));
+        System.out.println(foo);
+        return foo;
     }
 
     @PostMapping("category/rename")

@@ -41,14 +41,20 @@ public class CategoryDao {
     }
 
     @Transactional
-    public void save(Category category) {
+    public String save(Category category) {
         User user = em.find(User.class, userDao.getLoggedInUserId());
         category.setUser(user);
-        if (category.getCategoryId() == null) {
-            em.persist(category);
+        if (findByName(category.getName()).size() == 0) {
+            if (category.getCategoryId() == null) {
+                em.persist(category);
+            } else {
+                em.merge(category);
+            }
+            return "Category " + category.getName() + " added!";
         } else {
-            em.merge(category);
+            return "This category name already exists!";
         }
+
     }
 
     @Transactional
@@ -57,5 +63,12 @@ public class CategoryDao {
             Category c = em.find(Category.class, category.getCategoryId());
             c.setName(category.getName());
         }
+    }
+
+    public List<Category> findByName(String name) {
+        return em.createQuery(
+                "select c from Category c where c.name = :categoryName",
+                Category.class)
+                .setParameter("categoryName", name).getResultList();
     }
 }
