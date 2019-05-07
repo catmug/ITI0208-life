@@ -67,11 +67,19 @@ public class ExpenseDao implements Dao {
 
     @Transactional
     public void edit(Expense expense) {
-        save(expense);
+        User user = em.find(User.class, userDao.getLoggedInUserId());
+        expense.setUser(user);
+        Expense temp = findById(expense.getExpenseId());
+        LocalDateTime time = temp.getInsertTime();
+        expense.setInsertTime(time);
+        if (expense.getExpenseId() == null) {
+            em.persist(expense);
+        } else {
+            em.merge(expense);
+        }
     }
 
     public List<Expense> findAllByPeriod() {
-
         return Collections.emptyList();
     }
 
@@ -114,5 +122,9 @@ public class ExpenseDao implements Dao {
                 .setParameter("end", end)
                 .getResultList();
         return foo;
+    }
+
+    public Expense findById(Long id) {
+        return em.find(Expense.class, id);
     }
 }
