@@ -33,9 +33,7 @@ public class UserDao {
             } else {
                 em.merge(user);
             }
-            // todo ADD DEFAULT CATEGORIES METHOD CALLED HERE
             User u = findByName(user.getUsername()).get(0);
-            System.out.println(u);
             categoryDao.createDefaultCategories(u);
             return "User " + user.getUsername() + " added!";
         } else {
