@@ -66,9 +66,11 @@ public class CategoryDao {
 
     public List<Category> findByName(String name) {
         return em.createQuery(
-                "select c from Category c where c.name = :categoryName",
+                "select c from Category c where c.name = :categoryName and c.user.userId = :user",
                 Category.class)
-                .setParameter("categoryName", name).getResultList();
+                .setParameter("categoryName", name)
+                .setParameter("user", getLoggedInUserId())
+                .getResultList();
     }
 
     public Long getLoggedInUserId() {
