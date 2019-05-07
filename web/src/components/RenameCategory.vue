@@ -63,7 +63,7 @@
                 });
             },
             editCategory() {
-                axios.post('http://localhost:8080/api/category/rename', this.category)
+                axios.post(process.env.VUE_APP_API + '/category/rename', this.category)
                     .then(response => (this.success = response.data.success));
                 this.message = 'Category name has been updated to ' + this.category.name
                 window.setTimeout(this.closeMsg, 3000);

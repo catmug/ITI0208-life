@@ -36,7 +36,7 @@
         },
         methods: {
             send() {
-                axios.post('http://localhost:8080/api/goal', {month: 1, amount: this.goal.amount})
+                axios.post(process.env.VUE_APP_API + '/goal', {month: 1, amount: this.goal.amount})
                     .then(response => (this.success = response.data.success ));
             }
         }

@@ -125,28 +125,28 @@
                 this.category.categoryId = e;
             },
             send() {
-                axios.post('http://localhost:8080/api/expense/edit',
+                axios.post(process.env.VUE_APP_API + '/expense/edit',
                     this.modalInfo
                 ).then(response => (this.success = response.data,
                     this.updateTable()));
                 this.message = "The expense has been updated!"
             },
             updateTable() {
-                axios.get('http://localhost:8080/api/expense')
+                axios.get(process.env.VUE_APP_API + '/expense')
                     .then(response => (this.expenses = response.data));
             },
             deleteExpense(item) {
-                axios.delete("http://localhost:8080/api/expense/" + item.expenseId)
+                axios.delete(process.env.VUE_APP_API + "/expense/" + item.expenseId)
                     .then(response => (this.success = response.data.success,
                         this.updateTable()));
             },
             getExpensesByCategory(id) {
-                axios.get("http://localhost:8080/api/expense/" + id)
+                axios.get(process.env.VUE_APP_API + "/expense/" + id)
                     .then(response => (this.expenses = response.data));
             }
         },
         mounted() {
-            axios.get('http://localhost:8080/api/expense').then(response => (this.expenses = response.data));
+            axios.get(process.env.VUE_APP_API + '/expense').then(response => (this.expenses = response.data));
         },
         computed: {
             rows() {
