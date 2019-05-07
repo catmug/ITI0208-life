@@ -10,6 +10,14 @@
                         </b-card-text>
                     </b-tab>
                     <b-tab title="By Period">
+                        <v-date-picker
+                                mode='range'
+                                tint-color='#f142f4'
+                                v-model='selectedDate'
+                                :theme-styles='themeStyles'
+                                is-double-paned
+                                is-inline>
+                        </v-date-picker>
                         <b-card-text>
 <!--                            <date-picker v-model="temp" range type="date"></date-picker>-->
 <!--                            <datepicker :inline="true" language="en"></datepicker>-->

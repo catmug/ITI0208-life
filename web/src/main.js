@@ -11,6 +11,7 @@ import App from './App.vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VCalendar from 'v-calendar'
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
@@ -18,6 +19,7 @@ axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
+Vue.use(VCalendar);
 Vue.use(VeeValidate, {
   classes: true
 });
