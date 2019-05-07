@@ -19,8 +19,8 @@
                                 is-inline>
                         </v-date-picker>
                         <b-card-text>
-<!--                            <date-picker v-model="temp" range type="date"></date-picker>-->
-<!--                            <datepicker :inline="true" language="en"></datepicker>-->
+                            <!--                            <date-picker v-model="temp" range type="date"></date-picker>-->
+                            <!--                            <datepicker :inline="true" language="en"></datepicker>-->
                             <p>{{ temp }}</p>
                         </b-card-text>
                     </b-tab>
@@ -82,7 +82,6 @@
     import CategoryDropdown from "./CategoryDropdown";
     import DatePicker from 'vue2-datepicker'
     import Datepicker from 'vuejs-datepicker';
-
     export default {
         name: "ExpensesTable",
         components: {
@@ -115,7 +114,7 @@
                 this.modalInfo.content = JSON.stringify(item, null, 2);
                 this.modalInfo.expenseId = item.expenseId;
                 this.modalInfo.amount = item.amount;
-                this.modalInfo.category = item.category;
+                this.modalInfo.categoryId = item.category;
                 this.modalInfo.comment = item.comment;
                 this.$root.$emit('bv::show::modal', 'modalInfo', button)
             },
@@ -124,12 +123,12 @@
                 this.modalInfo.content = '';
                 this.modalInfo.id = '';
                 this.modalInfo.amount = '';
-                this.modalInfo.category = '';
+                this.modalInfo.categoryId = '';
                 this.modalInfo.comment = '';
                 this.message = '';
             },
             getSelectedCategory(e) {
-                this.modalInfo.category = e;
+                this.modalInfo.categoryId = e;
                 this.category.categoryId = e;
             },
             send() {

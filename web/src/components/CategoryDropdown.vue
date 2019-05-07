@@ -18,7 +18,7 @@
         data() {
             return {
                 categories: [],
-                selected: ""
+                selected: null
             }
         },
         methods: {
