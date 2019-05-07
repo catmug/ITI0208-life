@@ -29,11 +29,11 @@
                 small
         >
             <template slot="actions" slot-scope="row">
-                <b-button size="sm" @click="info(row.item, row.index, $event.target)">
-                    Edit
+                <b-button variant="primary" size="sm" class="icon--purple" @click="info(row.item, row.index, $event.target)">
+                    <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'edit'}" style="color: white"/>
                 </b-button>
-                <b-button size="sm" class="ml-1" @click="deleteExpense(row.item)">
-                    Remove
+                <b-button size="sm" class="ml-1 btn-danger" @click="deleteExpense(row.item)">
+                    <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash'}" />
                 </b-button>
             </template>
         </b-table>
@@ -81,7 +81,7 @@
                     {key: 'amount', label: 'Amount', sortable: true, sortDirection: 'desc'},
                     {key: 'insertTime', label: 'Insertion time', sortable: true, class: 'text-center'},
                     {key: 'categoryName', label: 'Category', sortable: true},
-                    {key: 'actions', label: ''}
+                    {key: 'actions', label: '', class: 'text-center'}
                 ],
                 expenses: [],
                 modalInfo: {title: '', content: ''},
