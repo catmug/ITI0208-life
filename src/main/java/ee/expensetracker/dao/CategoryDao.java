@@ -55,16 +55,23 @@ public class CategoryDao {
             }
             return "Category " + category.getName() + " added!";
         } else {
-            return "This category name already exists!";
+            return "A category with this name already exists!";
         }
     }
 
     @Transactional
-    public void rename(@NotNull Category category) {
+    public String rename(@NotNull Category category) {
         if (category.getCategoryId() != null && category.getName() != null) {
             Category c = em.find(Category.class, category.getCategoryId());
+            System.out.println(category);
+            System.out.println(c);
+            if (findByName(category.getName()).size() != 0) {
+                return "A category with this name already exists!";
+            }
             c.setName(category.getName());
+            return "Category name has been updated to " + category.getName();
         }
+        return "You either left the name blank or forgot to choose a category to rename!";
     }
 
     public List<Category> findByName(String name) {
