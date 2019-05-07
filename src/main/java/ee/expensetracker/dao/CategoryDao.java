@@ -12,6 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -83,38 +86,12 @@ public class CategoryDao {
     }
 
     public void createDefaultCategories(User user) {
-        System.out.println("Gonna start creating default categories!");
+        List<String> categoryNames = Arrays.asList("Riided", "Toidukaubad", "Meelelahutus", "Kodutarbed", "Elektroonika");
+        for (String category : categoryNames) {
+            Category temp = new Category(null, category, user);
+//            temp.setUser(user);
+//            temp.setName(category);
+            em.persist(temp);
+        }
     }
-
-//    public void createDefaultCategories(User user) {
-//        System.out.println("teen default kategooriaid kasutajale " + user);
-//        Category default1 = new Category();
-//        default1.setName("Riided");
-//        default1.setUser(user);
-//
-//        Category default2 = new Category();
-//        default2.setName("Toidukaubad");
-//        default2.setUser(user);
-//
-//        Category default3 = new Category();
-//        default3.setName("Meelelahutus");
-//        default3.setUser(user);
-//
-//        Category default4 = new Category();
-//        default4.setName("Kodutarbed");
-//        default4.setUser(user);
-//
-//        Category default5 = new Category();
-//        default5.setName("Elektroonika");
-//        default5.setUser(user);
-//
-//        System.out.println("tegin default category objektid ära");
-//        System.out.println(this.getAllCategories());
-//
-//        em.persist(default1);
-//        em.persist(default2);
-//        em.persist(default3);
-//        em.persist(default4);
-//        em.persist(default5);
-//    }
 }
