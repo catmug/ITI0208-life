@@ -42,7 +42,7 @@ const mutations = {
             'Content-type': 'application/x-www-form-urlencoded'
         };
 
-        axios.post('http://localhost:8080/api/login', data, {
+        axios.post(process.env.VUE_APP_API + '/login', data, {
             headers: headers,
         }).then(response => {
             state.user = user;
@@ -60,7 +60,7 @@ const mutations = {
         let headers = {
             'Content-type': 'application/json'
         };
-        axios.post('http://localhost:8080/api/register', data, {
+        axios.post(process.env.VUE_APP_API + '/register', data, {
             headers: headers,
         }).then(resp => {
             state.user = '';
@@ -71,7 +71,7 @@ const mutations = {
         })
     },
     [AUTH_LOGOUT]: (state) => {
-        axios.get('http://localhost:8080/api/logout').then(
+        axios.get(process.env.VUE_APP_API + '/logout').then(
             resp => {
                 state.user = '';
                 localStorage.removeItem('user');

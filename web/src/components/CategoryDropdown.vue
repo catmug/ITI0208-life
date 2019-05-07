@@ -27,7 +27,7 @@
             }
         },
         mounted() {
-            axios.get('http://localhost:8080/api/category').then(response => (this.categories = response.data));
+            axios.get(process.env.VUE_APP_API + '/category').then(response => (this.categories = response.data));
         },
         props: ['selectedCategory']
     }
