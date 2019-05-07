@@ -24,7 +24,7 @@ $grid-breakpoints: (
 $custom-background: #374785;
 $custom-background-dark: #fafff3;
 $custom-main: #e6c3de;
-$custom-main-dark: #a87e9b;
+$custom-main-dark: #8e4f87;
 $custom-error: #F76C6C;
 $custom-warn: #F8E9A1;
 $custom-success: #00887A;
@@ -45,6 +45,15 @@ html *{
   font-family: ff-tisa-sans-web-pro, sans-serif !important;
   font-style: normal;
   font-weight: 100;
+}
+
+.navbar__img{
+  height: 60px;
+  width: auto;
+}
+
+.icon--purple{
+  background-color: #4b1444;
 }
 
 .navbar--purple{
