@@ -55,7 +55,7 @@
                 });
             },
             send() {
-                axios.post('http://localhost:8080/api/category', this.category)
+                axios.post(process.env.VUE_APP_API + '/category', this.category)
                     .then(response => (this.message = response.data));
                 // this.message = 'The category ' + this.category.name + ' has been added!';
                 // console.log(this.success);

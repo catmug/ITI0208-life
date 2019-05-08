@@ -54,7 +54,7 @@
         },
         components: {CategoryDropdown},
         methods: {
-            validateForm: function (e) {
+            validateForm: function () {
                 this.submitted = true;
                 this.$validator.validate().then(valid => {
                     if (valid) {
@@ -63,9 +63,8 @@
                 });
             },
             editCategory() {
-                axios.post('http://localhost:8080/api/category/rename', this.category)
-                    .then(response => (this.success = response.data.success));
-                this.message = 'Category name has been updated to ' + this.category.name
+                axios.post(process.env.VUE_APP_API + '/category/rename', this.category)
+                    .then(response => (this.message = response.data));
                 window.setTimeout(this.closeMsg, 3000);
             },
 
