@@ -79,10 +79,23 @@ public class UserDao {
 
     @Transactional
     public void addGoal(Goal goal) {
+
         User user = em.find(User.class, getLoggedInUserId());
         goal.setUser(user);
-
         em.persist(goal);
+    }
+
+    public Double getGoal() {
+        Long id = em.find(User.class, getLoggedInUserId()).getUserId();
+        List<Goal> goals = em.createQuery(
+                "select g from Goal g where g.user.userId = :id",
+                Goal.class).setParameter("id", id).getResultList();
+
+        System.out.println(goals);
+        if (goals.size() == 0){
+            return Double.valueOf(0);
+        }
+        return goals.get(goals.size() - 1).getAmount();
     }
 
     public List<User> findByName(String name) {
