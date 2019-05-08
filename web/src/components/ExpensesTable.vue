@@ -47,7 +47,7 @@
                 small
         >
             <template slot="actions" slot-scope="row">
-                <b-button variant="primary" size="sm" class="icon--purple" @click="info(row.item, row.index, $event.target)">
+                <b-button variant="primary" size="sm" class="icon--purple mr-2" @click="info(row.item, row.index, $event.target)">
                     <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'edit'}" style="color: white"/>
                 </b-button>
                 <b-button size="sm" class="ml-1 btn-danger" @click="deleteExpense(row.item)">

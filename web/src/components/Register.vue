@@ -1,5 +1,22 @@
 <template>
-    <b-container lg="12" class="my-5">
+    <b-container lg="12" class="mb-5">
+        <b-row>
+            <b-col>
+                <b-navbar type="light" class="pb-0 ml-0 pl-0">
+                    <b-navbar-nav class="col-lg-2">
+                        <b-navbar-brand href="#" >
+                            <img src="../assets/banner.jpg" alt="Expense Tracker" class="img navbar__img">
+                        </b-navbar-brand>
+                    </b-navbar-nav>
+                    <!--<span left>Your goal: {{goal}} </span>-->
+                    <b-navbar-nav class="ml-auto align-bottom">
+                        <router-link to="/login">
+                            <h6 style="font-size: 17px">Log In</h6>
+                        </router-link>
+                    </b-navbar-nav>
+                </b-navbar>
+            </b-col>
+        </b-row>
         <b-row align-h="center" class="mb-3">
             <h2>Register</h2>
         </b-row>

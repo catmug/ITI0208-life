@@ -56,6 +56,10 @@ html *{
   background-color: #4b1444;
 }
 
+h2,h6{
+  color: $custom-main-dark;
+}
+
 .navbar--purple{
   background-color: $custom-background-dark;
   color: $text-dark;
