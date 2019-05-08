@@ -67,6 +67,7 @@
                 this.expense.categoryId = e;
             },
             closeMsg() {
+                //reset
                 document.getElementById("msg").style.display = " none";
                 this.submitted = false;
                 this.expense.amount = 0;
