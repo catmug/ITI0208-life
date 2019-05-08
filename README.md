@@ -1,19 +1,18 @@
 # ExpenseTracker
 
-Frontend jooksutamiseks
+***To run frontend***
 
 npm install
 
 npm run serve
 
 
-Testid:
+***Run tests:***
 
 npm run test:unit
 
 npm run test:e2e
 
 
-Backend entrypoint:
-
+***Backend entrypoint:***
 Application
