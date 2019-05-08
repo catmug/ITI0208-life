@@ -7,10 +7,13 @@ import ee.expensetracker.dto.ExpenseDto;
 import ee.expensetracker.model.Expense;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,34 +49,12 @@ public class ExpenseController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("expense/week")
-    public List<ExpenseDto> getWeeksExpenses() {
-        return dao.findLastWeekExpenses().stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("expense/month")
-    public List<ExpenseDto> getMonthsExpenses() {
-        return dao.findLastMonthExpenses().stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("expense/custom")
+    @GetMapping("expense/period")
     public List<ExpenseDto> getCustomExpenses(@RequestParam("start") String start,
                                               @RequestParam("end") String end) {
-        System.out.println("Got em in controller!\n");
-        System.out.println(start);
-        System.out.println(end);
-        LocalDateTime startLdt = LocalDateTime.parse(start);
-        LocalDateTime endLdt = LocalDateTime.parse(end);
-        System.out.println(startLdt);
-        System.out.println(endLdt);
-        return null;
-//        return dao.findCustomTimeExpenses(dates).stream()
-//                .map(this::convertToDto)
-//                .collect(Collectors.toList());
+        return dao.findCustomTimeExpenses(start, end).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("expense/{id}")

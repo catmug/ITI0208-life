@@ -95,10 +95,7 @@ public class CategoryDao {
     public void createDefaultCategories(User user) {
         List<String> categoryNames = Arrays.asList("Riided", "Toidukaubad", "Meelelahutus", "Kodutarbed", "Elektroonika");
         for (String category : categoryNames) {
-            Category temp = new Category(null, category, user);
-//            temp.setUser(user);
-//            temp.setName(category);
-            em.persist(temp);
+            em.persist(new Category(null, category, user));
         }
     }
 }

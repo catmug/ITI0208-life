@@ -3,7 +3,7 @@
     <div>
         <div class="form-group">
             <input type="number" v-model="expense.amount" aria-describedby="amountHelp" class="form-control"
-                   placeholder="Amount" data-cy="expense-amount">
+                   placeholder="Amount" data-cy="expense-amount" min="0">
             <small id="amountHelp" class="form-text text-muted">How much you spent*</small>
         </div>
         <div class="form-group">
