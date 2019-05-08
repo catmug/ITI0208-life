@@ -4,20 +4,15 @@ import ee.expensetracker.model.Expense;
 import ee.expensetracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Primary
@@ -67,52 +62,32 @@ public class ExpenseDao implements Dao {
 
     @Transactional
     public void edit(Expense expense) {
-        save(expense);
+        User user = em.find(User.class, userDao.getLoggedInUserId());
+        expense.setUser(user);
+        Expense temp = findById(expense.getExpenseId());
+        LocalDateTime time = temp.getInsertTime();
+        expense.setInsertTime(time);
+        if (expense.getExpenseId() == null) {
+            em.persist(expense);
+        } else {
+            em.merge(expense);
+        }
     }
 
-    public List<Expense> findAllByPeriod() {
-
-        return Collections.emptyList();
-    }
-
-    public List<Expense> findLastWeekExpenses() {
+    public List<Expense> findCustomTimeExpenses(String start, String end) {
         long id = userDao.getLoggedInUserId();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime weekAgo = now.minusDays(7L);
+        LocalDateTime startLdt = LocalDateTime.ofInstant(Instant.parse(start), ZoneOffset.UTC);
+        LocalDateTime endLdt = LocalDateTime.ofInstant(Instant.parse(end), ZoneOffset.UTC);
         return em.createQuery(
-                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
+                "select e from Expense e where e.user.userId = :id and e.insertTime > :start and e.insertTime < :end",
                 Expense.class)
                 .setParameter("id", id)
-                .setParameter("start", now)
-                .setParameter("end", weekAgo)
+                .setParameter("start", startLdt)
+                .setParameter("end", endLdt)
                 .getResultList();
     }
 
-    public List<Expense> findLastMonthExpenses() {
-        long id = userDao.getLoggedInUserId();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime weekAgo = now.minusMonths(1L);
-        return em.createQuery(
-                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
-                Expense.class)
-                .setParameter("id", id)
-                .setParameter("start", now)
-                .setParameter("end", weekAgo)
-                .getResultList();
-    }
-
-    public List<Expense> findCustomTimeExpenses(List<String> dates) {
-        long id = userDao.getLoggedInUserId();
-        System.out.println(dates);
-        LocalDateTime start = LocalDateTime.parse(dates.get(0));
-        LocalDateTime end = LocalDateTime.parse(dates.get(1));
-        List<Expense> foo =  em.createQuery(
-                "select e from Expense e where e.user.userId = :id and e.insertTime < :start and e.insertTime > :end",
-                Expense.class)
-                .setParameter("id", id)
-                .setParameter("start", start)
-                .setParameter("end", end)
-                .getResultList();
-        return foo;
+    public Expense findById(Long id) {
+        return em.find(Expense.class, id);
     }
 }

@@ -3,7 +3,7 @@
     <div>
         <div class="form-group">
             <input type="number" v-model="expense.amount" aria-describedby="amountHelp" class="form-control"
-                   placeholder="Amount" data-cy="expense-amount">
+                   placeholder="Amount" data-cy="expense-amount" min="0">
             <small id="amountHelp" class="form-text text-muted">How much you spent*</small>
         </div>
         <div class="form-group">
@@ -42,7 +42,7 @@
         },
         methods: {
             send() {
-                axios.post('http://localhost:8080/api/expense', this.expense
+                axios.post(process.env.VUE_APP_API + '/expense', this.expense
                 ).then(response => (this.success = response.data));
                 this.message = 'New Expense has been added';
                 window.setTimeout(this.closeMsg, 3000);

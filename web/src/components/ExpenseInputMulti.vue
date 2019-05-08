@@ -27,7 +27,7 @@
         },
         methods: {
             send() {
-                axios.post('http://localhost:8080/api/expense',
+                axios.post(process.env.VUE_APP_API + '/expense',
                     this.expense
                 ).then(response => (this.success = response.data));
                 this.message =  'New Expenses have been added';

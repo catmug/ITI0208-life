@@ -67,8 +67,8 @@
                 })
             }
         },
-        beforeUpdate() {
-            axios.get("http://localhost:8080/api/goal")
+        beforeUpdate () {
+            axios.get(process.env.VUE_APP_API + "/goal")
                 .then(response => (this.goal = response.data));
         }
     }

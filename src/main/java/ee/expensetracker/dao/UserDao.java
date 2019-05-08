@@ -3,6 +3,7 @@ package ee.expensetracker.dao;
 import ee.expensetracker.model.Goal;
 import ee.expensetracker.model.User;
 import ee.expensetracker.service.MyUserPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,9 @@ public class UserDao {
     @PersistenceContext
     private EntityManager em;
 
+    @Autowired
+    private CategoryDao categoryDao;
+
     @Transactional
     public String save(User user) {
         if (findByName(user.getUsername()).size() == 0) {
@@ -29,9 +33,11 @@ public class UserDao {
             } else {
                 em.merge(user);
             }
-            return "Category " + user.getUsername() + " added!";
+            User u = findByName(user.getUsername()).get(0);
+            categoryDao.createDefaultCategories(u);
+            return "User " + user.getUsername() + " added!";
         } else {
-            return "This category name already exists!";
+            return "This username already exists!";
         }
     }
 
