@@ -35,7 +35,7 @@ public class UserDao {
             }
             User u = findByName(user.getUsername()).get(0);
             categoryDao.createDefaultCategories(u);
-            return "User " + user.getUsername() + " added!";
+            return "";
         } else {
             return "This username already exists!";
         }
@@ -48,6 +48,14 @@ public class UserDao {
             id = ((MyUserPrincipal) principal).getUserId();
         }
         return id;
+    }
+
+    public String isUnique(String user) {
+        if(findByName(user).size() == 0){
+            return "";
+        } else{
+            return "This username already exists!";
+        }
     }
 
     public boolean doesUsernameExist (String username) {
