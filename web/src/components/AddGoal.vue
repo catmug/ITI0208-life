@@ -24,10 +24,10 @@
         </b-row>
         <p></p>
         <div class="row">
-            <p>This months goal is {{ setGoal }}</p>
+            <h6>This months goal is {{ setGoal }}</h6>
         </div>
         <div class="row">
-            <p>You have left to spend {{ setGoal - leftToSpend }}</p>
+            <h6>You have left to spend {{ setGoal - leftToSpend }}</h6>
         </div>
     </b-container>
     </template>
