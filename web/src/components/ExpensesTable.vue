@@ -13,6 +13,7 @@
                         <b-card-text>
                             <div class="container">
                                 <div class="row justify-content-center">
+
                             <v-date-picker
                                     mode='range'
                                     tint-color='#f142f4'
@@ -22,6 +23,7 @@
                                     is-inline
                             >
                             </v-date-picker>
+                            
                                 </div>
                                 <div class="row justify-content-center">
                                     <b-button class="float-righ my-3" @click="getByTimePeriod" variant="outline-primary">Submit</b-button>
