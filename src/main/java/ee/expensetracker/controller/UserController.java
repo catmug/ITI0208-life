@@ -33,9 +33,9 @@ public class UserController {
         return userdao.getUserById(id);
     }
 
-    @GetMapping("user/exists/{username}")
-    public boolean doesUserExist(@PathVariable("username") String username) {
-        return userdao.doesUsernameExist(username);
+    @PostMapping("user/exists/{username}")
+    public String doesUserExist(@PathVariable("username") String username) {
+        return userdao.isUnique(username);
     }
 
     @GetMapping("user/{username}")

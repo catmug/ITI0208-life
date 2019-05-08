@@ -57,8 +57,6 @@
             send() {
                 axios.post(process.env.VUE_APP_API + '/category', this.category)
                     .then(response => (this.message = response.data));
-                // this.message = 'The category ' + this.category.name + ' has been added!';
-                // console.log(this.success);
                 window.setTimeout(this.closeMsg, 3000);
             },
 
@@ -66,6 +64,7 @@
                 document.getElementById("msg").style.display = " none";
                 this.submitted = false;
                 this.category.name = '';
+                this.message = '';
             },
 
 

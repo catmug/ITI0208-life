@@ -4,7 +4,7 @@
             <b-col>
                 <b-navbar type="light" class="pb-0 ml-0 pl-0">
                     <b-navbar-nav class="col-lg-2">
-                        <b-navbar-brand href="#" >
+                        <b-navbar-brand href="#">
                             <img src="../assets/banner.jpg" alt="Expense Tracker" class="img navbar__img">
                         </b-navbar-brand>
                     </b-navbar-nav>
@@ -33,6 +33,10 @@
                         <div
                                 v-if="submitted && errors.has('username')"
                                 class="invalid-feedback"><p class="mb-0">{{ errors.first('username') }}</p></div>
+                        <div v-if="submitted">
+                            <p>{{message}}</p>
+                        </div>
+
                     </b-form-group>
 
                     <b-form-group>
@@ -74,9 +78,16 @@
             validateForm: function (e) {
                 this.submitted = true;
                 this.$validator.validate().then(valid => {
-                    if (valid) {
-                       this.register();
-                    }
+
+                    axios.post(process.env.VUE_APP_API + '/user/exists/' + this.username).
+                    then(resp => {
+                        this.message = resp.data;
+                        if (valid && this.message.length === 0) {
+                            this.register();
+                        }
+                    });
+
+
                 });
             },
             register() {
