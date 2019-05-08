@@ -16,23 +16,12 @@
         </b-row>
         <b-row>
             <b-col>
-                <p class="float-left">{{message}}</p>
+                <b-button class="float-left" @click="send()" variant="outline-primary">Add Goal</b-button>
             </b-col>
             <b-col>
-                <b-button class="float-right" @click="send()" variant="outline-primary">Add Goal</b-button>
+                <p class="float-left">{{message}}</p>
             </b-col>
         </b-row>
-    </b-container>
-    <!--<div class="container" id="AddGoal">
-        <div class="row">
-            <div class="col">
-
-            </div>
-            <input type="number" v-model="goal.amount" aria-describedby="amountHelp"
-                   placeholder="Amount">
-            <b-button @click="send()" variant="outline-primary">Add Goal</b-button>
-            <p>{{message}}</p>
-        </div>
         <p></p>
         <div class="row">
             <p>This months goal is {{ setGoal }}</p>
@@ -40,7 +29,7 @@
         <div class="row">
             <p>You have left to spend {{ setGoal - leftToSpend }}</p>
         </div>
-    </div>
+    </b-container>
     </template>
 
 <script>
