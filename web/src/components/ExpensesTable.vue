@@ -10,18 +10,23 @@
                         </b-card-text>
                     </b-tab>
                     <b-tab title="By Period">
-                        <v-date-picker
-                                mode='range'
-                                tint-color='#f142f4'
-                                v-model='selectedDate'
-                                :theme-styles='themeStyles'
-                                is-double-paned
-                                is-inline>
-                        </v-date-picker>
                         <b-card-text>
-                            <!--                            <date-picker v-model="temp" range type="date"></date-picker>-->
-                            <!--                            <datepicker :inline="true" language="en"></datepicker>-->
-                            <p>{{ temp }}</p>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                            <v-date-picker
+                                    mode='range'
+                                    tint-color='#f142f4'
+                                    v-model='selectedDate'
+                                    :theme-styles='themeStyles'
+                                    is-double-paned
+                                    is-inline
+                            >
+                            </v-date-picker>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <b-button class="float-righ my-3" @click="getByTimePeriod" variant="outline-primary">Submit</b-button>
+                                </div>
+                            </div>
                         </b-card-text>
                     </b-tab>
                 </b-tabs>
@@ -86,8 +91,6 @@
         name: "ExpensesTable",
         components: {
             CategoryDropdown,
-            DatePicker,
-            Datepicker
         },
         data() {
             return {
@@ -105,7 +108,7 @@
                 message: '',
                 perPage: 5,
                 currentPage: 1,
-                temp: null
+                selectedDate: null
             }
         },
         methods: {
@@ -149,6 +152,15 @@
             },
             getExpensesByCategory(id) {
                 axios.get(process.env.VUE_APP_API + "/expense/" + id)
+                    .then(response => (this.expenses = response.data));
+            },
+            getByTimePeriod() {
+                axios.get(process.env.VUE_APP_API + "/expense/period", {
+                    params: {
+                        start: this.selectedDate.start,
+                        end: this.selectedDate.end
+                    }
+                })
                     .then(response => (this.expenses = response.data));
             }
         },

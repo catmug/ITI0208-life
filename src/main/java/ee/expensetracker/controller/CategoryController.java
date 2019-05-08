@@ -38,8 +38,8 @@ public class CategoryController {
     }
 
     @PostMapping("category/rename")
-    public void rename(@RequestBody CategoryDto category) throws ParseException {
-        dao.rename(convertToModel(category));
+    public String rename(@RequestBody CategoryDto category) throws ParseException {
+        return dao.rename(convertToModel(category));
     }
 
     private Category convertToModel(CategoryDto categoryDto) throws ParseException {
